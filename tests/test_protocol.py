@@ -1,7 +1,7 @@
 """Golden vectors captured from the M-EFCS editor on 2026-09-16 (docs/captures)."""
 import pytest
 
-from mk300 import protocol as p
+from mvave import protocol as p
 
 EDITOR = {
     "preset vol 60": "F0 00 32 09 51 00 00 00 02 18 00 00 00 21 00 00 00 3C 00 54 04 F7",

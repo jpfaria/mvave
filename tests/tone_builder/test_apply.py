@@ -30,7 +30,7 @@ def test_apply_sequence(plan):
     r = RecordingRunner()
     cmds = B.apply_plan(plan, "150", "GRAVITY", r)
     assert cmds[0] == ["read", "150"] and cmds[1] == ["load", "150"]
-    assert ["model", "AMP", "60"] in cmds and ["model", "DS", "1"] in cmds
+    assert ["model", "AMP", "61DUMBLE_FG"] in cmds and ["model", "DS", "2TS8"] in cmds
     assert ["param", "DS", "0", "20"] in cmds and ["param", "DLY", "0", "454"] in cmds
     assert ["enable", "AMP", "on"] in cmds and ["enable", "REV", "off"] in cmds and ["enable", "WAH", "off"] in cmds
     assert not any(c[:2] == ["enable", "VOL"] for c in cmds)
@@ -68,10 +68,10 @@ def test_verify_reads_back(plan):
 
 def test_main_plan_only_and_exit_codes(tmp_path, monkeypatch):
     out = tmp_path / "plan.json"
-    monkeypatch.setattr(B.Runner, "exe", f"{sys.executable} -m mk300")
+    monkeypatch.setattr(B.Runner, "exe", f"{sys.executable} -m mvave")
     monkeypatch.setenv("PYTHONPATH", str(FIX.parents[2]))
     monkeypatch.chdir(FIX.parents[2])
-    mk = ["--mk300", f"{sys.executable} -m mk300"]
+    mk = ["--mvave", f"{sys.executable} -m mvave"]
     assert B.main(["--research", str(FIX / "gravity_rhythm.json"), "--plan", str(out), *mk]) == 0
     assert '"Normal EQ 10"' in out.read_text()
     bad = tmp_path / "bad.json"

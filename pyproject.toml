@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mk300"
-version = "0.1.0"
-description = "Talk to the M-VAVE MK-300 over USB (SysEx) without the M-EFCS editor: presets, models, knobs, block on/off, globals, catalog of the 359 models."
+name = "mvave"
+version = "0.2.0"
+description = "Talk to M-VAVE pedals (M-EFCS protocol) over USB without the editor: presets, models, knobs, block on/off, globals, re-amp; MK-300 profile with its 359-model catalog."
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
@@ -19,13 +19,13 @@ dev = ["pytest", "sounddevice>=0.5", "soundfile>=0.12", "numpy>=1.26"]
 reamp = ["sounddevice>=0.5", "soundfile>=0.12", "numpy>=1.26"]
 
 [project.scripts]
-mk300 = "mk300.cli:main"
+mvave = "mvave.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["mk300*"]
+include = ["mvave*"]
 
 [tool.setuptools.package-data]
-mk300 = ["catalog.json"]
+"mvave.devices" = ["*_catalog.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

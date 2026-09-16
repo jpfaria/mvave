@@ -1,6 +1,6 @@
 """Which catalog model is based on a real-world unit ("Marshall JCM800" -> 21J800_CL_196 ...).
 
-The MK-300 names are abbreviations of the modelled gear (J800 = JCM800, FD = Fender, VXO = Vox,
+The M-VAVE names are abbreviations of the modelled gear (J800 = JCM800, FD = Fender, VXO = Vox,
 MES = Mesa, LANY = Laney, BOG = Bogner, EHV5150 = EVH 5150, RADAL = Randall, DUMBLE, ...).
 This is a deterministic token match against a small alias table plus the model name; the
 score is 0..1 and the caller decides. Nothing here is verified by ear."""
@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import re
 
-from . import catalog as cat
 
 ALIASES = {  # real-world token -> tokens that appear in MK-300 names
     "marshall": ["j120", "j800", "j900", "j2000", "jvm", "mar", "jv410", "uk", "196", "57"],
@@ -53,7 +52,7 @@ def _matches(w: str, ntoks: set[str]) -> bool:
     return any(w == t or (len(w) >= 3 and w in t) for t in ntoks)
 
 
-def resolve(block: str, query: str) -> list[tuple[dict, float]]:
+def resolve(cat, block: str, query: str) -> list[tuple[dict, float]]:
     """Score = mean over query tokens of: 1 when the token itself is in the name, 0.75 when a
     model-specific alias of it is ('jcm800' -> j800), 0.5 when only a brand-level alias hits (so
     'Marshall JCM800' ranks J800 above J900 and 'Dumble Overdrive Special' ranks DUMBLE above every _OD)."""

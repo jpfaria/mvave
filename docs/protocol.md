@@ -2,7 +2,7 @@
 
 Measured on 2026-09-16 by spying on the M-EFCS editor (macOS, `com.digAmp.dgAmp` 3.7.1413,
 Flutter + `flutter_midi_command`) with MIDI Monitor while it talked to an MK-300 on firmware
-V73 over USB (CoreMIDI port `USB Composite Device`). Reproduced by the `mk300` package;
+V73 over USB (CoreMIDI port `USB Composite Device`). Reproduced by the `mvave` package;
 golden vectors in `tests/test_protocol.py`, raw captures in `docs/captures/` (`from-pedal.log.gz` = every frame the pedal sent during the session, `model_defaults.jsonl`, `knobs.json`).
 
 ## Frame
@@ -34,22 +34,22 @@ Ack for every write: `F0 00 32 01 08 00 00 00 00 7F 01 F7`.
 | `1` | the **edit buffer**: the 448-byte preset struct below | read 0/448 (whole preset), read 0x42/24 (one block's knobs), writes of 1–2 bytes at any offset |
 | `2` | 86-byte **global / status** block, polled by the editor once per second (`read 0 len 86`): byte 0 = current preset index, 0x38 A/B Convert (0/1), 0x3C RCH (0 Nor, 1 Dry, 2 NoCAB), 0x3D USB Audio (0 ON, 1 OFF, 2 RESAMPLE, 3 DRY); the editor writes them with `write_u8` in space 2 | |
 | `E` | **commands**: `write_u8(offset = preset index, 01)` loads that preset (0-based; editor label `[001]` = 0). The pedal acks, then the editor reads the edit buffer | |
-| `F` | **commit**: `F0 00 32 09 41 00 00 00 02 00 00 00 00 0F 00 00 00 0B 00 F7` (cls 09, cmd 41, field 0, len 0, no payload) right after a bank write. The flash write takes a few seconds; commands sent meanwhile may cancel it — `mk300` waits until the slot reads back the new image before loading it | |
+| `F` | **commit**: `F0 00 32 09 41 00 00 00 02 00 00 00 00 0F 00 00 00 0B 00 F7` (cls 09, cmd 41, field 0, len 0, no payload) right after a bank write. The flash write takes a few seconds; commands sent meanwhile may cancel it — `mvave` waits until the slot reads back the new image before loading it | |
 
 MIDI Monitor showed the editor's bank-write header as `09 41 1C 00 00 02 40 2C 04 00 38 00 00 4A …`
-(one `00` fewer than the 4+4-digit header `mk300` sends); the pedal accepts the 4+4 form and the
+(one `00` fewer than the 4+4-digit header `mvave` sends); the pedal accepts the 4+4 form and the
 slot changes, so that is what the library uses.
 
 The pedal is also a 2-in/2-out 44.1 kHz USB audio interface (`USB-Audio`). With USB Audio =
 RESAMPLE, USB playback goes through the effect chain and comes back on the USB input (a −20 dBFS
-sine returned at −26 dBFS through JM-CL; DRY returns silence) — that is `mk300 reamp`.
+sine returned at −26 dBFS through JM-CL; DRY returns silence) — that is `mvave reamp`.
 
 ## Preset struct (448 bytes, space 1; identical to the records of the editor's factory bank `mk300_am4_preset.bin` = 160 × 448 + "PATCHEND")
 
 | Offset | Size | Content |
 |---|---|---|
 | 0x00 | 20 | name, NUL-padded. O **visor da pedaleira só relê o nome no boot**: depois de um
-`save`/`rename` o slot já lê de volta com o nome novo (`mk300 read N`) e a tela continua mostrando
+`save`/`rename` o slot já lê de volta com o nome novo (`mvave read N`) e a tela continua mostrando
 o antigo, inclusive depois de um `load` desse mesmo slot. Desligar e ligar atualiza (16/09). |
 | 0x14 | 4 | `FF 90 1E 00` in every factory preset (unknown) |
 | 0x18 | u16 | Preset Vol (0–100) |
@@ -92,16 +92,16 @@ model defaults and the editor re-reads `0x42 + 24·b`, 24 bytes). On/off of bloc
 int16 little-endian. 0–100 for most knobs; `Speed` ×10 (2.5 Hz = 25); delay `Time` in ms;
 EQ bands and gate thresholds in dB (negative = two's complement, `Thd` −60 = `C4 FF`); `Sync` 0/1.
 `DS`, `AMP` and `CAB` keep their knob values across a model change; the other blocks are reset to
-the model's defaults (recorded in `mk300/catalog.json`).
+the model's defaults (recorded in `mvave/devices/mk300_catalog.json`).
 
 ## Not captured
 
-Rename / chain reorder as the editor does them (`mk300` writes those bytes one by one with
+Rename / chain reorder as the editor does them (`mvave` writes those bytes one by one with
 `write_u8`, verified by read-back), the other global fields (Sync, Pedal State, toe switches, BT/USB
 volumes — the editor's clicks were not observed writing them), the EQ / Looper / Drum pages, IR / AMP /
 DS `.am3Data` uploads (Sounds and Import pages), footswitch assignments (bytes 0x14A… of the preset),
 what the pedal broadcasts when a footswitch changes the preset (nothing beyond byte 0 of the polled
-global block changing; `mk300 listen` polls it).
+global block changing; `mvave listen` polls it).
 
 ## Official MIDI CC map (from M-VAVE's "MK300 MIDI Control Mapping Table", firmware V73)
 

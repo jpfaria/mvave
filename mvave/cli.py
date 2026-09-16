@@ -1,46 +1,54 @@
-"""mk300 command line. Every command talks to the pedal over USB except `models`, `params`,
-`bank` and `resolve`, which only read the catalog / files."""
+"""mvave command line. Every command talks to the pedal over USB except `models`, `params`,
+`bank` and `resolve`, which only read the catalog / files. `--device` picks the pedal profile
+(default mk300); the protocol is the M-EFCS editor's, shared by every M-VAVE pedal it supports."""
 from __future__ import annotations
 
 import argparse
 import sys
 
-from . import catalog as cat
-from . import preset as pr
+from . import catalog as catalog_mod
+from . import devices
 from . import protocol as p
 
-GLOBAL_FIELDS = {  # offset in space 2 -> (name, values)   (see docs/protocol.md)
-    0x38: ("ab-convert", ["OFF", "ON"]),
-    0x3C: ("rch", ["Nor", "Dry", "NoCAB"]),
-    0x3D: ("usb-audio", ["ON", "OFF", "RESAMPLE", "DRY"]),
-}
+PROF = devices.get()          # rebound in main() from --device
+cat = catalog_mod.load(PROF)
+pr = devices.mk300            # the struct helpers module of the active profile (offsets, Preset)
+GLOBAL_FIELDS = PROF.global_fields
+
+
+def _use_device(name: str | None):
+    global PROF, cat, pr, GLOBAL_FIELDS
+    PROF = devices.get(name)
+    cat = catalog_mod.load(PROF)
+    pr = sys.modules[PROF.preset_cls.__module__]
+    GLOBAL_FIELDS = PROF.global_fields
 
 
 def _dev(args):
-    from .device import MK300
-    return MK300(args.port)
+    from .device import MVave
+    return MVave(PROF, args.port)
 
 
 def _block(name: str) -> int:
     try:
-        return cat.block_id(name)
+        return cat.block(name)
     except KeyError:
-        sys.exit(f"unknown block {name!r}; blocks: {', '.join(pr.BLOCKS)}")
+        sys.exit(f"unknown block {name!r}; blocks: {', '.join(cat.blocks)}")
 
 
 def _slot(s: str) -> int:
     """'[003]', '003', '3' -> 2 (0-based)."""
     n = int(s.strip("[]"))
-    if not 1 <= n <= 160:
-        sys.exit("presets are 1..160")
+    if not 1 <= n <= PROF.slots:
+        sys.exit(f"presets are 1..{PROF.slots}")
     return n - 1
 
 
-def show_preset(ps: pr.Preset, index: int | None = None) -> str:
+def show_preset(ps, index: int | None = None) -> str:
     head = f"[{index + 1:03d}] " if index is not None else ""
     lines = [f"{head}{ps.name}   vol {ps.volume}  bpm {ps.bpm}  pan {ps.pan:+d}",
-             "chain: " + " > ".join(pr.BLOCKS[b] for b in ps.chain)]
-    for b, bname in enumerate(pr.BLOCKS):
+             "chain: " + " > ".join(cat.blocks[b] for b in ps.chain)]
+    for b, bname in enumerate(cat.blocks):
         m = ps.model(b)
         try:
             md = cat.model(bname, m)
@@ -105,7 +113,7 @@ def _simple_u16(offset):
 def cmd_presets(a):
     with _dev(a) as d:
         cur = d.current_preset_index()
-        for i in range(160):
+        for i in range(PROF.slots):
             print(f"{'*' if i == cur else ' '} [{i + 1:03d}] {d.read_slot(i).name}")
 
 
@@ -152,8 +160,8 @@ def cmd_rename(a):
 
 def cmd_chain(a):
     ids = [_block(b) for b in a.blocks]
-    if sorted(ids) != list(range(11)):
-        sys.exit("give all 11 blocks once: " + " ".join(pr.BLOCKS))
+    if sorted(ids) != list(range(len(cat.blocks))):
+        sys.exit(f"give all {len(cat.blocks)} blocks once: " + " ".join(cat.blocks))
     with _dev(a) as d:
         d.write_bytes(pr.OFF_CHAIN, bytes(ids))
         print(" > ".join(pr.BLOCKS[b] for b in d.read_preset().chain))
@@ -215,7 +223,7 @@ def cmd_bank(a):
 
 def cmd_resolve(a):
     from .resolve import resolve
-    for m, score in resolve(a.block, a.query)[:a.n]:
+    for m, score in resolve(cat, a.block, a.query)[:a.n]:
         print(f"{score:4.2f}  {m['index']:3d}  {m['name']}")
 
 
@@ -238,8 +246,9 @@ def cmd_listen(a):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(prog="mk300", description="M-VAVE MK-300 over USB without the editor")
-    ap.add_argument("--port", help="MIDI port name (default: the one containing 'USB Composite Device')")
+    ap = argparse.ArgumentParser(prog="mvave", description="M-VAVE pedals over USB without the M-EFCS editor")
+    ap.add_argument("--device", default=devices.DEFAULT, help=f"pedal profile: {', '.join(devices.PROFILES)} (default {devices.DEFAULT})")
+    ap.add_argument("--port", help="MIDI port name (default: the profile's port, e.g. 'USB Composite Device')")
     sub = ap.add_subparsers(dest="cmd")
 
     s = sub.add_parser("show", help="the edit buffer: name, chain, models, knobs"); s.set_defaults(fn=cmd_show)
@@ -259,20 +268,21 @@ def main(argv=None):
     s = sub.add_parser("copy", help="copy a stored preset to another slot: copy 3 150 [NAME]")
     s.add_argument("src"); s.add_argument("dst"); s.add_argument("name", nargs="?"); s.add_argument("--overwrite", action="store_true"); s.set_defaults(fn=cmd_copy)
     s = sub.add_parser("rename", help="rename the edit buffer (save afterwards)"); s.add_argument("name"); s.set_defaults(fn=cmd_rename)
-    s = sub.add_parser("chain", help="signal order of the 11 blocks: chain WAH FX GATE DS AMP CAB EQ MOD REV DLY VOL (unverified in the editor: byte-wise writes)")
-    s.add_argument("blocks", nargs=11); s.set_defaults(fn=cmd_chain)
+    s = sub.add_parser("chain", help="signal order of the blocks: chain WAH FX GATE DS AMP CAB EQ MOD REV DLY VOL (byte-wise writes, read back)")
+    s.add_argument("blocks", nargs="+"); s.set_defaults(fn=cmd_chain)
     s = sub.add_parser("reamp", help="play DI.wav through the pedal over USB audio (USB Audio = RESAMPLE) and record OUT.wav")
     s.add_argument("di"); s.add_argument("out"); s.add_argument("--tail", type=float, default=2.0); s.add_argument("--mono", action="store_true"); s.set_defaults(fn=cmd_reamp)
     s = sub.add_parser("global", help="read the global block (space 2)"); s.set_defaults(fn=cmd_global)
     s = sub.add_parser("global-set", help="write ONE known global field: global-set rch Dry"); s.add_argument("name"); s.add_argument("value"); s.set_defaults(fn=cmd_global_set)
     s = sub.add_parser("models", help="catalog: models of a block"); s.add_argument("block"); s.set_defaults(fn=cmd_models)
     s = sub.add_parser("params", help="catalog: knobs and defaults of a model"); s.add_argument("block"); s.add_argument("model"); s.set_defaults(fn=cmd_params)
-    s = sub.add_parser("bank", help="list a bank file (the editor's mk300_am4_preset.bin)"); s.add_argument("file"); s.add_argument("-v", "--verbose", action="store_true"); s.set_defaults(fn=cmd_bank)
+    s = sub.add_parser("bank", help="list a bank file (the editor's <device>_am4_preset.bin)"); s.add_argument("file"); s.add_argument("-v", "--verbose", action="store_true"); s.set_defaults(fn=cmd_bank)
     s = sub.add_parser("resolve", help="which model is based on a real-world unit: resolve AMP 'Marshall JCM800'")
     s.add_argument("block"); s.add_argument("query"); s.add_argument("-n", type=int, default=5); s.set_defaults(fn=cmd_resolve)
     s = sub.add_parser("listen", help="print the preset index whenever it changes (footswitches)"); s.add_argument("seconds", type=int, nargs="?", default=60); s.set_defaults(fn=cmd_listen)
 
     a = ap.parse_args(argv)
+    _use_device(a.device)
     if not a.cmd:
         ap.print_help(); return 0
     a.fn(a)

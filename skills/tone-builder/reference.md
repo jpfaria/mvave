@@ -2,14 +2,14 @@
 
 Two tools, used only from the command line:
 
-- `mk300` — the pedal. `resolve` (catalog lookup), `reamp` (USB audio through the pedal), and the
-  preset commands `build_patch.py` drives. Everything about the pedal itself is in the `mk300` skill.
+- `mvave` — the pedal. `resolve` (catalog lookup), `reamp` (USB audio through the pedal), and the
+  preset commands `build_patch.py` drives. Everything about the pedal itself is in the `mvave` skill.
 - `tone-analyzer` — the audio (github.com/jpfaria/tone-analyzer, Python ≥ 3.11). `analyze` /
   `compare` / `eq-match` on WAV files. Override the executable with `$TONE_ANALYZER`. Its interface
   lives in `scripts/analyzer.py` (see its docstring); when the CLI changes, fix that one file.
 
-Setup: `tone-analyzer` is a dependency of `mk300` (installed with it); the re-amp loop also needs
-`pip install "mk300[reamp]"`. Check `mk300 resolve AMP "Fender Twin"` and `tone-analyzer --help`
+Setup: `tone-analyzer` is a dependency of `mvave` (installed with it); the re-amp loop also needs
+`pip install "mvave[reamp]"`. Check `mvave resolve AMP "Fender Twin"` and `tone-analyzer --help`
 before starting a tone; missing → install, do not improvise.
 
 Scripts live in `${CLAUDE_PLUGIN_ROOT}/skills/tone-builder/scripts/` (stdlib only, Python ≥ 3.11).
@@ -50,7 +50,7 @@ or knob indices.
 **Knob aliases** (`params` key → model knob it lands on, first match by prefix): `gain|drive` → Gain/Drive/Sustain/Fuzz;
 `level|volume|output` → Level/Volume/Output; `tone`; `bass|low`; `mid|middle`; `treble|high`; `presence` → Pres;
 `resonance` → Reso; `bright`; `time|time_ms` → Time; `feedback|repeats` → Fb; `mix|blend`; `depth`; `rate|speed` → Speed;
-`threshold` → Thd/Gate; `attack`; `release`; `decay`. Any other key is `unmapped`. Run `mk300 params BLOCK MODEL` to see a model's knobs.
+`threshold` → Thd/Gate; `attack`; `release`; `decay`. Any other key is `unmapped`. Run `mvave params BLOCK MODEL` to see a model's knobs.
 
 ## Catalog rules that differ from a modeler with free slots
 
@@ -62,7 +62,7 @@ or knob indices.
 - `DS`/`AMP` knobs are the pedal's generic stack (Gain, Level, Bass, Middle, Treble, Reso, Pres,
   Bright); the real unit's dials map onto it as `derived`.
 - Preset volume, pan, chain order, globals, footswitches: not this skill — the user configures them
-  with the `mk300` skill afterwards.
+  with the `mvave` skill afterwards.
 
 ## Commands
 
@@ -70,7 +70,7 @@ or knob indices.
 TB=${CLAUDE_PLUGIN_ROOT}/skills/tone-builder/scripts
 python3 $TB/build_patch.py --research R.json --plan PLAN.json                 # plan only, no pedal
 python3 $TB/build_patch.py --research R.json --plan PLAN.json --apply 150 NAME [--overwrite] [--eq-gains g1,…,g10]
-mk300 reamp DI.wav WET.wav [--tail S] [--mono]                                # USB Audio = RESAMPLE for the run
+mvave reamp DI.wav WET.wav [--tail S] [--mono]                                # USB Audio = RESAMPLE for the run
 tone-analyzer analyze REF.wav --out-dir EVAL/ref                              # fingerprint.json: self_floor_pct, top_octave_dead
 tone-analyzer compare REF.wav WET.wav --out-dir EVAL/v1                       # diff.json: proximity_pct
 tone-analyzer eq-match REF.wav WET.wav --gains g1,…,g8 --output EVAL/v1/eq_match.json   # 8 analyzer bands (80 Hz…10.24 kHz)
@@ -90,17 +90,17 @@ and `unmapped` lists on stderr: relay both to the user.
 
 ## Re-amp
 
-`mk300 reamp` sets the global USB Audio field to RESAMPLE, plays the DI on the pedal's USB audio
+`mvave reamp` sets the global USB Audio field to RESAMPLE, plays the DI on the pedal's USB audio
 output (`USB-Audio`, 44.1 kHz), records the return and restores the field. Exits with "no signal"
 when nothing came back.
 
-DI: a real guitar DI WAV, reused across every tone, kept at `$HOME/.mk300/di.wav`. Ask the user for
+DI: a real guitar DI WAV, reused across every tone, kept at `$HOME/.mvave/di.wav`. Ask the user for
 it once (any dry electric-guitar recording, mono, a few bars of open chords + single notes). The
 `tone-analyzer` test fixtures are synthetic tones, not a guitar — never use them as the DI. No DI →
 the validation loop is unavailable → reference-less path, say so.
 
 ## Evaluation directory
 
-`EVAL = $HOME/.mk300/evaluations/<artist-song-slug>/` (create it). Keep `research/<role>-v<N>.json`,
+`EVAL = $HOME/.mvave/evaluations/<artist-song-slug>/` (create it). Keep `research/<role>-v<N>.json`,
 `plan-v<N>.json`, `wet-v<N>.wav`, the analyzer out-dirs, and `eval.md` (gear research with sources,
 mapping, iteration log with the numbers, unverified params, methodology notes).

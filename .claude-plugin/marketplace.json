@@ -1,14 +1,15 @@
 {
-  "name": "mvave-mk-300",
+  "name": "mvave",
+  "description": "M-VAVE pedals over USB without the editor: the mvave CLI/skill and the tone-builder skill.",
   "owner": {
     "name": "João Paulo",
-    "url": "https://github.com/jpfaria/mvave-mk-300"
+    "url": "https://github.com/jpfaria/mvave"
   },
   "plugins": [
     {
-      "name": "mk300",
+      "name": "mvave",
       "source": "./",
-      "description": "Control an M-VAVE MK-300 over USB (SysEx) from Claude: presets, models, knobs, block on/off, globals, re-amp. Two skills: mk300 (configure the pedal) and tone-builder (a song's tone as a preset)."
+      "description": "Control M-VAVE pedals (MK-300 profile) over USB (SysEx) from Claude: presets, models, knobs, block on/off, globals, re-amp. Two skills: mvave (configure the pedal) and tone-builder (a song's tone as a preset)."
     }
   ]
 }

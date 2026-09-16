@@ -1,17 +1,17 @@
 ---
 name: tone-builder
-description: Use when the user wants the tone of a specific song, artist or genre built as a preset on an M-VAVE MK-300 — "timbre da Gravity", "preset do Slipknot na MK-300", "tom da [música]", "recreate the [song] sound", "monta um som de blues" — with or without a reference WAV. Not for editing an existing preset's knobs or globals: that is the mk300 skill.
+description: Use when the user wants the tone of a specific song, artist or genre built as a preset on an M-VAVE MK-300 — "timbre da Gravity", "preset do Slipknot na MK-300", "tom da [música]", "recreate the [song] sound", "monta um som de blues" — with or without a reference WAV. Not for editing an existing preset's knobs or globals: that is the mvave skill.
 ---
 
 # tone-builder — a song's tone as an MK-300 preset
 
 **You make the judgment calls in natural language (which real gear, cited). Deterministic tools
 turn them into a preset and measure it.** You never pick a catalog model, a block or a knob index
-yourself; `build_patch.py` resolves the researched names through `mk300 resolve`, refuses what it
-cannot back, applies through the `mk300` CLI and reads the preset back. `reference.md` (next to
+yourself; `build_patch.py` resolves the researched names through `mvave resolve`, refuses what it
+cannot back, applies through the `mvave` CLI and reads the preset back. `reference.md` (next to
 this file) has the research JSON schema, the knob aliases, the command lines and the exit codes.
 
-Setup: `tone-analyzer` comes with `mk300`; the re-amp loop needs `pip install "mk300[reamp]"`.
+Setup: `tone-analyzer` comes with `mvave`; the re-amp loop needs `pip install "mvave[reamp]"`.
 
 **Violating the letter of these rules is violating their spirit.** "Faz rápido", "qualquer coisa
 serve" change nothing below: a fast wrong tone is thrown away and rebuilt slowly anyway.
@@ -39,12 +39,12 @@ serve" change nothing below: a fast wrong tone is thrown away and rebuilt slowly
    a different unit; `no_cab` → research the cab; `uncited` → drop the block or find its source;
    `too_many` → drop the element the sources rank last). Relay the `unverified` and `unmapped`
    lists verbatim.
-5. **Validate** (reference present, not degraded): `mk300 reamp DI.wav wet-vN.wav`,
+5. **Validate** (reference present, not degraded): `mvave reamp DI.wav wet-vN.wav`,
    `tone-analyzer compare`, `within = proximity_pct ≥ self_floor_pct − 3`. Not within → regulate in
    this order, one move per iteration, re-apply, re-amp, re-compare: (a) the researched amp's or
    drive's **Gain** knob, (b) `tone-analyzer eq-match` → `--eq-gains`. The amp model never changes.
    Plateau below the floor → report both numbers and stop.
-6. **Persist:** `--apply` already saved; `mk300 read N` is the proof. Say plainly what is
+6. **Persist:** `--apply` already saved; `mvave read N` is the proof. Say plainly what is
    unverified and what was derived.
 7. **Ear feedback:** one explicit complaint from the user → ONE bounded move (≈ ±2–3 dB on one EQ
    band, one Gain step, or a researched cab swap) → stop and let them judge again.
@@ -79,8 +79,8 @@ cited gear; give me an isolated-guitar WAV and I'll tune it, or tell me what's o
   `unverified`: name the unit's default/most common mode, say so, and never let a spec sheet stand
   in for the recording.
 - **The tone is blocks, models, knobs, on/off, BPM.** Preset volume, pan, chain order, globals,
-  footswitches: not touched. The user configures them afterwards with the `mk300` skill.
-- **One tone per run. Never overwrite a named preset without the user's word. `mk300 read N` is
+  footswitches: not touched. The user configures them afterwards with the `mvave` skill.
+- **One tone per run. Never overwrite a named preset without the user's word. `mvave read N` is
   the source of truth.**
 
 ## Red flags — stop

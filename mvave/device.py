@@ -1,27 +1,27 @@
-"""USB-MIDI transport for the MK-300 (mido / python-rtmidi, CoreMIDI port `USB Composite Device`)."""
+"""USB-MIDI transport for an M-VAVE pedal (mido / python-rtmidi), bound to a device profile."""
 from __future__ import annotations
 
 import time
 
 import mido
 
+from . import devices
 from . import protocol as p
-from .preset import SIZE as PRESET_SIZE, Preset
 
-PORT_HINT = "USB Composite Device"
 _POLL_S = 0.005
 
 
-def find_port(hint: str = PORT_HINT) -> str:
+def find_port(hint: str) -> str:
     names = [n for n in mido.get_input_names() if hint in n]
     if not names:
         raise RuntimeError(f"no MIDI port containing {hint!r}: {mido.get_input_names()}")
     return names[0]
 
 
-class MK300:
-    def __init__(self, port: str | None = None):
-        port = port or find_port()
+class MVave:
+    def __init__(self, profile=None, port: str | None = None):
+        self.profile = profile or devices.get()
+        port = port or find_port(self.profile.port_hint)
         self._in = mido.open_input(port)
         self._out = mido.open_output(port)
         self.port = port
@@ -30,7 +30,7 @@ class MK300:
         self._in.close()
         self._out.close()
 
-    def __enter__(self) -> "MK300":
+    def __enter__(self) -> "MVave":
         return self
 
     def __exit__(self, *exc) -> None:
@@ -65,7 +65,7 @@ class MK300:
                 break
             if p.is_ack(r):
                 return
-        raise TimeoutError("no ack from the MK-300 (wrong checksum frames are silently dropped)")
+        raise TimeoutError("no ack from the pedal (wrong checksum frames are silently dropped)")
 
     def read(self, field: int, length: int, space: int = p.SPACE_PRESET, timeout: float = 2.0) -> bytes:
         self.drain()
@@ -84,15 +84,16 @@ class MK300:
         raise TimeoutError(f"no reply to read {field:#x}/{length} in space {space}")
 
     # -- preset (edit buffer) ---------------------------------------------------------
-    def read_preset(self) -> Preset:
-        return Preset(self.read(0, PRESET_SIZE))
+    def read_preset(self):
+        return self.profile.preset(self.read(0, self.profile.preset_size))
 
-    def read_slot(self, slot: int) -> Preset:
+    def read_slot(self, slot: int):
         """A stored preset straight from flash (space 0), without loading it."""
-        return Preset(self.read(slot * PRESET_SIZE, PRESET_SIZE, p.SPACE_BANK, timeout=3.0))
+        n = self.profile.preset_size
+        return self.profile.preset(self.read(slot * n, n, p.SPACE_BANK, timeout=3.0))
 
     def preset_names(self) -> list[str]:
-        return [self.read_slot(i).name for i in range(160)]
+        return [self.read_slot(i).name for i in range(self.profile.slots)]
 
     def write_bytes(self, field: int, data: bytes, space: int = p.SPACE_PRESET) -> None:
         """Byte-wise writes (u8 per byte) - used for the name and the chain order."""
@@ -125,8 +126,10 @@ class MK300:
         self.write(p.write_u16(field, value, space))
 
     def save_preset(self, slot: int, image: bytes) -> None:
-        """Write a 448-byte image to flash slot `slot` (0-based) the way the editor's "Save to"
+        """Write a preset image to flash slot `slot` (0-based) the way the editor's "Save to"
         does: bulk write, commit, then load that slot (so the edit buffer shows it)."""
+        if len(image) != self.profile.preset_size:
+            raise ValueError(f"preset image must be {self.profile.preset_size} bytes")
         self.write(p.write_preset_image(slot, image), timeout=5.0)
         self.write(p.COMMIT, timeout=5.0)
         # the flash write takes a moment; sending more commands meanwhile can lose it. Wait until
@@ -145,7 +148,7 @@ class MK300:
 
     # -- global block (space 2) --------------------------------------------------------
     def read_global(self) -> bytes:
-        return self.read(0, p.GLOBAL_SIZE, p.SPACE_STATUS)
+        return self.read(0, self.profile.global_size, p.SPACE_STATUS)
 
     def current_preset_index(self) -> int:
         return self.read_global()[0]

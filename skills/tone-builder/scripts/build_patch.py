@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""research JSON -> resolve (mk300 resolve) -> gate -> plan -> apply (mk300 CLI).
+"""research JSON -> resolve (mvave resolve) -> gate -> plan -> apply (mvave CLI).
 
-Stdlib only. Talks to the pedal ONLY through the `mk300` command line; never imports it.
+Stdlib only. Talks to the pedal ONLY through the `mvave` command line; never imports it.
 The MK-300 has a fixed chain of 11 blocks (WAH FX GATE DS AMP CAB EQ MOD DLY REV VOL): every
 researched element lands in its block; blocks with nothing researched are switched off.
 Exit codes: 2 build aborted (see reason), 4 verify mismatch, 5 target preset is named (no --overwrite).
@@ -45,8 +45,8 @@ class BuildError(SystemExit):
 
 
 class Runner:
-    """Runs `mk300 ...`; injectable for tests."""
-    exe = "mk300"            # may be a command line, e.g. "python3 -m mk300"
+    """Runs `mvave ...`; injectable for tests."""
+    exe = "mvave"            # may be a command line, e.g. "python3 -m mvave"
 
     def run(self, args: list[str]) -> tuple[int, str]:
         p = subprocess.run([*shlex.split(self.exe), *args], capture_output=True, text=True)
@@ -92,7 +92,7 @@ _RESOLVE_LINE = re.compile(r"^\s*([0-9.]+)\s+(\d+)\s+(\S.*?)\s*$")
 
 
 def _resolve(runner: Runner, block: str, name: str) -> tuple[int, str]:
-    """`mk300 resolve BLOCK NAME` prints `score index name` lines. Strict: the best score must be
+    """`mvave resolve BLOCK NAME` prints `score index name` lines. Strict: the best score must be
     unique (a tie between different units is `unresolved`); nothing found is `unresolved`."""
     code, out = runner.run(["resolve", block, name, "-n", "5"])
     rows = [(float(m[1]), int(m[2]), m[3]) for m in map(_RESOLVE_LINE.match, out.splitlines()) if m]
@@ -243,7 +243,7 @@ def apply_plan(plan: Plan, preset: str, name: str, runner: Runner, overwrite: bo
     for c in seq:
         code, out = runner.run(c)
         if code != 0:
-            raise SystemExit(f"mk300 {' '.join(c)} failed: {out.strip()}")
+            raise SystemExit(f"mvave {' '.join(c)} failed: {out.strip()}")
     return cmds + seq
 
 
@@ -289,10 +289,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--eq-gains", help="10 comma-separated dB values for Normal EQ 10 (31 Hz..16 kHz), capped ±6")
     ap.add_argument("--apply", nargs=2, metavar=("PRESET", "NAME"), help="push the plan into PRESET (1..160) and save it as NAME")
     ap.add_argument("--overwrite", action="store_true", help="allow --apply on a preset that already has a name")
-    ap.add_argument("--mk300", default="mk300", help='mk300 command (default: mk300 on PATH; e.g. "python3 -m mk300")')
+    ap.add_argument("--mvave", default="mvave", help='mvave command (default: mvave on PATH; e.g. "python3 -m mvave --device mk300")')
     a = ap.parse_args(argv)
     runner = Runner()
-    runner.exe = a.mk300
+    runner.exe = a.mvave
     gains = [float(x) for x in a.eq_gains.split(",")] if a.eq_gains else None
     try:
         plan = build_plan(load_research(a.research), runner, gains)

@@ -1,4 +1,4 @@
-"""MK-300 SysEx protocol: frame layout, 7-bit packing, checksum.
+"""M-EFCS (M-VAVE) SysEx protocol: frame layout, 7-bit packing, checksum.
 
 Reverse-engineered from the M-EFCS editor (3.7.1413) talking to firmware V73 on
 2026-09-16; see docs/protocol.md.  Every frame is
@@ -32,7 +32,6 @@ SPACE_COMMAND = 0xE  # "load preset N" = write 01 at offset N
 SPACE_COMMIT = 0xF   # "commit the bank write" = cls 09 cmd 41 field 0 len 0, no payload
 
 HEADER_LEN = 14
-GLOBAL_SIZE = 86      # bytes in the global-settings block (space 2)
 ACK = bytes.fromhex("f0 00 32 01 08 00 00 00 00 7f 01 f7")
 
 
@@ -147,15 +146,13 @@ def load_preset(index: int) -> bytes:
 
 
 def write_preset_image(slot: int, image: bytes) -> bytes:
-    """The editor's "Save to": the 448-byte preset image into flash slot `slot` (0-based).
-    CMD is 0x41 with the second 7-bit digit = number of 16-byte chunks (448/16 = 0x1C).
-    Must be followed by COMMIT and (as the editor does) a load of that slot."""
-    if len(image) != 448:
-        raise ValueError("preset image must be 448 bytes")
-    return build(CLS_WRITE, CMD_READ | ((len(image) // 16) << 7), slot * 448, len(image), SPACE_BANK, image)
+    """The editor's "Save to": a preset image into flash slot `slot` (0-based), at byte offset
+    slot * len(image). CMD is 0x41 with the second 7-bit digit = number of 16-byte chunks
+    (448/16 = 0x1C on the MK-300). Must be followed by COMMIT and (as the editor does) a load."""
+    return build(CLS_WRITE, CMD_READ | ((len(image) // 16) << 7), slot * len(image), len(image), SPACE_BANK, image)
 
 
 COMMIT = build(CLS_WRITE, CMD_READ, 0, 0, SPACE_COMMIT)   # F0 00 32 09 41 00 00 00 02 00 00 00 00 0F 00 00 00 0B 00 F7
 
-POLL = read(0, GLOBAL_SIZE, SPACE_STATUS)          # what the editor sends every second
-READ_PRESET = read(0, 448, SPACE_PRESET)  # the whole edit buffer
+POLL = read(0, 86, SPACE_STATUS)          # what the M-EFCS editor sends every second (MK-300: 86-byte global block)
+READ_PRESET = read(0, 448, SPACE_PRESET)  # the whole MK-300 edit buffer

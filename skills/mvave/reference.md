@@ -1,13 +1,13 @@
-# mk300 reference
+# mvave reference (MK-300 profile)
 
 ## Commands
 
 ```
-usage: mk300 [-h] [--port PORT]
+usage: mvave [-h] [--device DEVICE] [--port PORT]
              {show,load,param,model,enable,volume,bpm,pan,presets,read,save,copy,rename,chain,reamp,global,global-set,models,params,bank,resolve,listen}
              ...
 
-M-VAVE MK-300 over USB without the editor
+M-VAVE pedals over USB without the M-EFCS editor
 
 positional arguments:
   {show,load,param,model,enable,volume,bpm,pan,presets,read,save,copy,rename,chain,reamp,global,global-set,models,params,bank,resolve,listen}
@@ -29,16 +29,16 @@ positional arguments:
     copy                copy a stored preset to another slot: copy 3 150
                         [NAME]
     rename              rename the edit buffer (save afterwards)
-    chain               signal order of the 11 blocks: chain WAH FX GATE DS
-                        AMP CAB EQ MOD REV DLY VOL (unverified in the editor:
-                        byte-wise writes)
+    chain               signal order of the blocks: chain WAH FX GATE DS AMP
+                        CAB EQ MOD REV DLY VOL (byte-wise writes, read back)
     reamp               play DI.wav through the pedal over USB audio (USB
                         Audio = RESAMPLE) and record OUT.wav
     global              read the global block (space 2)
     global-set          write ONE known global field: global-set rch Dry
     models              catalog: models of a block
     params              catalog: knobs and defaults of a model
-    bank                list a bank file (the editor's mk300_am4_preset.bin)
+    bank                list a bank file (the editor's
+                        <device>_am4_preset.bin)
     resolve             which model is based on a real-world unit: resolve AMP
                         'Marshall JCM800'
     listen              print the preset index whenever it changes
@@ -46,7 +46,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --port PORT           MIDI port name (default: the one containing 'USB
+  --device DEVICE       pedal profile: mk300 (default mk300)
+  --port PORT           MIDI port name (default: the profile's port, e.g. 'USB
                         Composite Device')
 ```
 

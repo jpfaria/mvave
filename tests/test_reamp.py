@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 
 sf = pytest.importorskip("soundfile")
-from mk300 import reamp as R
+from mvave import reamp as R
 
 
 class FakeDev:

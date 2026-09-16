@@ -1,9 +1,9 @@
 {
-  "name": "mk300",
-  "description": "Control an M-VAVE MK-300 over USB from Claude (presets, models, knobs, block on/off, globals, re-amp over USB audio) and build a song's tone as a preset from cited gear research.",
-  "version": "0.1.0",
+  "name": "mvave",
+  "description": "Control M-VAVE pedals (M-EFCS protocol; MK-300 mapped) over USB from Claude — presets, models, knobs, block on/off, globals, re-amp over USB audio — and build a song's tone as a preset from cited gear research.",
+  "version": "0.2.0",
   "author": {
     "name": "João Paulo"
   },
-  "homepage": "https://github.com/jpfaria/mvave-mk-300"
+  "homepage": "https://github.com/jpfaria/mvave"
 }

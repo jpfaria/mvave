@@ -12,8 +12,8 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class RealRunner(B.Runner):
-    """The real catalog commands (no pedal): `python3 -m mk300 resolve|params`."""
-    exe = f"{sys.executable} -m mk300"
+    """The real catalog commands (no pedal): `python3 -m mvave resolve|params`."""
+    exe = f"{sys.executable} -m mvave"
 
     def run(self, args):
         p = subprocess.run([*shlex.split(self.exe), *args], capture_output=True, text=True,

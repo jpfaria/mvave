@@ -1,5 +1,11 @@
-from mk300 import catalog as cat
-from mk300.resolve import resolve
+from mvave import catalog as catalog_mod
+from mvave.resolve import resolve as _resolve
+
+cat = catalog_mod.load()
+
+
+def resolve(block, q):
+    return _resolve(cat, block, q)
 
 
 def test_counts():

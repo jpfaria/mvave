@@ -1,4 +1,4 @@
-from mk300 import preset as pr
+from mvave.devices import mk300 as pr
 
 
 def test_factory_jm_od_layout():
