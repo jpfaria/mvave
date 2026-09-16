@@ -1,0 +1,740 @@
+{
+ "WAH": {
+  "0": [
+   "Value",
+   "Gain",
+   "Level"
+  ],
+  "1": [
+   "Value",
+   "Gain",
+   "Level"
+  ],
+  "2": [
+   "Value",
+   "Gain",
+   "Level"
+  ],
+  "3": [
+   "Value",
+   "Gain",
+   "Level"
+  ],
+  "4": [
+   "Speed",
+   "Q",
+   "Mix",
+   "Width",
+   "Level",
+   "Sync"
+  ],
+  "5": [
+   "Sense",
+   "Attack",
+   "Q",
+   "fPeak",
+   "Mix",
+   "Width",
+   "Level"
+  ]
+ },
+ "FX": {
+  "0": [
+   "Speed",
+   "Q",
+   "Mix",
+   "Width",
+   "Level",
+   "Sync"
+  ],
+  "1": [
+   "Bit",
+   "Level",
+   "filter"
+  ],
+  "2": [
+   "Sense",
+   "Attack",
+   "Q",
+   "fPeak",
+   "Mix",
+   "Width",
+   "Level"
+  ],
+  "3": [
+   "Gain",
+   "Level"
+  ],
+  "4": [
+   "Gain",
+   "Bass",
+   "Mid",
+   "Treble",
+   "Level"
+  ],
+  "5": [
+   "Gain",
+   "Bass",
+   "Mid",
+   "Treble",
+   "Level"
+  ],
+  "6": [
+   "Gain",
+   "Bass",
+   "Mid",
+   "Treble",
+   "Level"
+  ],
+  "7": [
+   "Gain",
+   "Grit",
+   "Level"
+  ],
+  "8": [
+   "Sustain",
+   "Attack",
+   "Level",
+   "Blend"
+  ],
+  "9": [
+   "Ratio",
+   "Gain",
+   "Knee",
+   "Thd",
+   "Attack",
+   "Level",
+   "Blend"
+  ],
+  "10": [
+   "Ratio",
+   "Gain",
+   "Knee",
+   "Thd",
+   "Attack",
+   "Tone",
+   "Level",
+   "Blend"
+  ],
+  "12": [
+   "High Level",
+   "Low Level",
+   "Dry Level"
+  ],
+  "11": [
+   "High Pitch",
+   "Low Pitch",
+   "High Level",
+   "Low Level",
+   "Dry Level"
+  ],
+  "13": [
+   "Freq",
+   "Mix"
+  ],
+  "14": [
+   "Semi"
+  ],
+  "15": [
+   "Mode",
+   "Bend",
+   "Mix"
+  ]
+ },
+ "GATE": {
+  "0": [
+   "Gate",
+   "Bias"
+  ],
+  "1": [
+   "Thd"
+  ],
+  "2": [
+   "Thd"
+  ],
+  "3": [
+   "Att",
+   "Rel",
+   "Thd",
+   "Kw",
+   "Ratio"
+  ],
+  "4": [
+   "Sustain",
+   "Attack",
+   "Level",
+   "Blend"
+  ],
+  "5": [
+   "Ratio",
+   "Gain",
+   "Knee",
+   "Thd",
+   "Attack",
+   "Level",
+   "Blend"
+  ],
+  "6": [
+   "Ratio",
+   "Gain",
+   "Knee",
+   "Thd",
+   "Attack",
+   "Tone",
+   "Level",
+   "Blend"
+  ],
+  "7": [
+   "Gate",
+   "Bias"
+  ]
+ },
+ "DS": {
+  "*": [
+   "Gain",
+   "Level",
+   "Bass",
+   "Middle",
+   "Treble",
+   "Reso",
+   "Pres",
+   "Bright"
+  ]
+ },
+ "AMP": {
+  "*": [
+   "Gain",
+   "Level",
+   "Bass",
+   "Middle",
+   "Treble",
+   "Reso",
+   "Pres",
+   "Bright"
+  ]
+ },
+ "CAB": {
+  "*": [
+   "Level",
+   "Low Cut",
+   "High Cut"
+  ]
+ },
+ "EQ": {
+  "0": [
+   "100Hz",
+   "200Hz",
+   "400Hz",
+   "800Hz",
+   "1.6kHz",
+   "3.2kHz"
+  ],
+  "1": [
+   "50Hz",
+   "120Hz",
+   "400Hz",
+   "500Hz",
+   "800Hz",
+   "4.5kHz",
+   "10k"
+  ],
+  "2": [
+   "31.25Hz",
+   "62.5Hz",
+   "125Hz",
+   "250Hz",
+   "500Hz",
+   "1kHz",
+   "2kHz",
+   "4kHz",
+   "8kHz",
+   "16kHz"
+  ]
+ },
+ "MOD": {
+  "0": [
+   "Speed",
+   "Depth",
+   "Mix",
+   "Sync"
+  ],
+  "1": [
+   "Speed",
+   "Depth",
+   "Mix",
+   "Sync"
+  ],
+  "2": [
+   "Speed",
+   "Depth",
+   "Fb",
+   "Mix",
+   "Sync"
+  ],
+  "3": [
+   "Speed",
+   "Depth",
+   "Fb",
+   "Mix",
+   "Sync"
+  ],
+  "4": [
+   "Speed",
+   "Depth",
+   "Level",
+   "Sync"
+  ],
+  "5": [
+   "Speed",
+   "Depth",
+   "Level",
+   "Sync"
+  ],
+  "6": [
+   "Speed",
+   "Depth",
+   "Level",
+   "Sync"
+  ],
+  "7": [
+   "Speed",
+   "MidCut",
+   "Reso",
+   "Fb",
+   "Sync"
+  ],
+  "8": [
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "9": [
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "10": [
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "11": [
+   "Speed",
+   "Depth",
+   "Mix",
+   "Sync"
+  ],
+  "12": [
+   "Speed",
+   "Depth",
+   "Mix",
+   "Sync"
+  ],
+  "13": [
+   "Speed",
+   "Min",
+   "Max",
+   "Mix",
+   "Fb",
+   "Sync"
+  ],
+  "14": [
+   "Speed",
+   "Stage",
+   "Regen",
+   "Mix",
+   "Lfo",
+   "Sync"
+  ],
+  "15": [
+   "Speed",
+   "Depth",
+   "Regen",
+   "Mix",
+   "Jet",
+   "Lfo",
+   "Sync"
+  ],
+  "16": [
+   "Speed",
+   "Stage",
+   "Regen",
+   "Mix",
+   "Lfo",
+   "Sync"
+  ],
+  "17": [
+   "Speed",
+   "Depth",
+   "Mode",
+   "Mix",
+   "Sync"
+  ],
+  "18": [
+   "Speed",
+   "Depth",
+   "Level",
+   "Mode",
+   "Sync"
+  ],
+  "19": [
+   "Speed",
+   "Depth",
+   "Bits",
+   "Mix",
+   "Sync"
+  ]
+ },
+ "REV": {
+  "0": [
+   "Decay",
+   "Mix",
+   "High Pass",
+   "Low Pass",
+   "Mod Depth"
+  ],
+  "1": [
+   "Decay",
+   "Mix",
+   "High Pass",
+   "Low Pass",
+   "Mod Depth"
+  ],
+  "10": [
+   "Decay",
+   "Mix",
+   "High Pass",
+   "Low Pass",
+   "Mod Depth"
+  ],
+  "2": [
+   "Decay",
+   "Mix",
+   "High Pass",
+   "Low Pass",
+   "Mod Depth"
+  ],
+  "3": [
+   "Decay",
+   "Mix",
+   "High Pass",
+   "Low Pass",
+   "Combs"
+  ],
+  "4": [
+   "Decay",
+   "Mix",
+   "Tone",
+   "Pitch",
+   "Amount"
+  ],
+  "5": [
+   "Decay",
+   "Mix",
+   "Tone",
+   "Lend",
+   "Length"
+  ],
+  "6": [
+   "Decay",
+   "Mix",
+   "High Pass",
+   "Low Pass",
+   "Diff"
+  ],
+  "7": [
+   "Decay",
+   "Mix",
+   "Sample Rate",
+   "Noise Level",
+   "Mod Depth"
+  ],
+  "8": [
+   "Decay",
+   "Mix",
+   "Tone",
+   "Lend",
+   "Rise Time"
+  ],
+  "9": [
+   "Decay",
+   "Mix",
+   "High Pass",
+   "Low Pass",
+   "Mod Depth"
+  ],
+  "11": [
+   "Decay",
+   "Mix",
+   "High Pass",
+   "Low Pass",
+   "Mod Depth"
+  ],
+  "12": [
+   "Decay",
+   "Mix",
+   "High Pass",
+   "Low Pass",
+   "Combs"
+  ],
+  "13": [
+   "Decay",
+   "Mix",
+   "Tone",
+   "Pitch",
+   "Amount"
+  ],
+  "14": [
+   "Decay",
+   "Mix",
+   "Tone",
+   "Lend",
+   "Length"
+  ],
+  "15": [
+   "Decay",
+   "Mix",
+   "High Pass",
+   "Low Pass",
+   "Diff"
+  ],
+  "17": [
+   "Decay",
+   "Mix",
+   "Tone",
+   "Lend",
+   "Rise Time"
+  ],
+  "16": [
+   "Decay",
+   "Mix",
+   "Sample Rate",
+   "Noise Level",
+   "Mod Depth"
+  ]
+ },
+ "DLY": {
+  "0": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Sync"
+  ],
+  "1": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Phaser",
+   "Mod",
+   "Sync"
+  ],
+  "2": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Sync"
+  ],
+  "3": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Sync"
+  ],
+  "4": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Release",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "5": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Grit",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "6": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Pattern",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "7": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Filter",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "8": [
+   "Time",
+   "Fb",
+   "Mix",
+   "T-Mode",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "9": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Grit",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "10": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Pattern",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "11": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Pitch",
+   "Mod",
+   "Sync"
+  ],
+  "12": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Phaser",
+   "Mod",
+   "Sync"
+  ],
+  "13": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Sync"
+  ],
+  "14": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Sync"
+  ],
+  "26": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Phaser",
+   "Mod",
+   "Sync"
+  ],
+  "15": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Sync"
+  ],
+  "16": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Sync"
+  ],
+  "17": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Release",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "18": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Grit",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "19": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Pattern",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "20": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Filter",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "21": [
+   "Time",
+   "Fb",
+   "Mix",
+   "T-Mode",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "22": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Grit",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "23": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Pattern",
+   "Speed",
+   "Depth",
+   "Sync"
+  ],
+  "24": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Pitch",
+   "Mod",
+   "Sync"
+  ],
+  "25": [
+   "Time",
+   "Fb",
+   "Mix",
+   "Phaser",
+   "Mod",
+   "Sync"
+  ]
+ },
+ "VOL": {
+  "0": [
+   "VOL"
+  ]
+ },
+ "_note": "REV 16 and DLY 15-25 are assumed to mirror their mono model (every other stereo variant checked did); the rest were read from the editor's panel on 2026-09-16."
+}

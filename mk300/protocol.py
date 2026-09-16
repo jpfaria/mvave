@@ -8,8 +8,8 @@ Reverse-engineered from the M-EFCS editor (3.7.1413) talking to firmware V73 on
 where the 14 header bytes are plain 7-bit values, FIELD is a byte offset inside the
 addressed memory space, SUB = (len << 4 | space) written as little-endian 7-bit
 digits, and the payload plus one checksum byte are packed LSB-first, 7 bits per
-SysEx byte.  ck8 = 0xFB - (sum(payload) + sum(FIELD bytes) + sum(bytes of
-(len << 8 | space << 4))) mod 256; CLS and CMD are not covered.
+SysEx byte.  ck8 = 0xFB - (sum(payload) + sum(bytes of u32 FIELD) + sum(bytes of
+u32 (len << 8 | space << 4))) mod 256 -- the 8-bit bytes, not the 7-bit digits; CLS and CMD are not covered.
 """
 from __future__ import annotations
 
@@ -75,7 +75,7 @@ def _from_u32_7(b: bytes) -> int:
 
 def checksum(field: int, length: int, space: int, payload: bytes) -> int:
     sub8 = (length << 8) | (space << 4)
-    total = sum(payload) + sum(_u32_7(field)) + sum(sub8.to_bytes(4, "little"))
+    total = sum(payload) + sum(field.to_bytes(4, "little")) + sum(sub8.to_bytes(4, "little"))
     return (0xFB - total) & 0xFF
 
 
