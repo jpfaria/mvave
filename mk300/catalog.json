@@ -1,0 +1,4846 @@
+{
+ "blocks": [
+  {
+   "id": 0,
+   "name": "WAH",
+   "models": [
+    {
+     "index": 0,
+     "name": "X-Wah",
+     "knobs": [
+      "Value",
+      "Gain",
+      "Level"
+     ],
+     "defaults": [
+      50,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Funk-Wah",
+     "knobs": [
+      "Value",
+      "Gain",
+      "Level"
+     ],
+     "defaults": [
+      50,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Slide-Wah",
+     "knobs": [
+      "Value",
+      "Gain",
+      "Level"
+     ],
+     "defaults": [
+      50,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Cry-Wah",
+     "knobs": [
+      "Value",
+      "Gain",
+      "Level"
+     ],
+     "defaults": [
+      50,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 4,
+     "name": "Wah-Wah",
+     "knobs": [
+      "Speed",
+      "Q",
+      "Mix",
+      "Width",
+      "Level",
+      "Sync"
+     ],
+     "defaults": [
+      25,
+      50,
+      80,
+      25,
+      50
+     ]
+    },
+    {
+     "index": 5,
+     "name": "Sense-Wah",
+     "knobs": [
+      "Sense",
+      "Attack",
+      "Q",
+      "fPeak",
+      "Mix",
+      "Width",
+      "Level"
+     ],
+     "defaults": [
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50
+     ]
+    }
+   ]
+  },
+  {
+   "id": 1,
+   "name": "FX",
+   "models": [
+    {
+     "index": 0,
+     "name": "Wah-Wah",
+     "knobs": [
+      "Speed",
+      "Q",
+      "Mix",
+      "Width",
+      "Level",
+      "Sync"
+     ],
+     "defaults": [
+      25,
+      50,
+      80,
+      25,
+      50
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Lofi",
+     "knobs": [
+      "Bit",
+      "Level",
+      "filter"
+     ],
+     "defaults": [
+      14,
+      50,
+      0
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Sense-Wah",
+     "knobs": [
+      "Sense",
+      "Attack",
+      "Q",
+      "fPeak",
+      "Mix",
+      "Width",
+      "Level"
+     ],
+     "defaults": [
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Boost",
+     "knobs": [
+      "Gain",
+      "Level"
+     ]
+    },
+    {
+     "index": 4,
+     "name": "A Boost",
+     "knobs": [
+      "Gain",
+      "Bass",
+      "Mid",
+      "Treble",
+      "Level"
+     ]
+    },
+    {
+     "index": 5,
+     "name": "E Boost",
+     "knobs": [
+      "Gain",
+      "Bass",
+      "Mid",
+      "Treble",
+      "Level"
+     ]
+    },
+    {
+     "index": 6,
+     "name": "B Boost",
+     "knobs": [
+      "Gain",
+      "Bass",
+      "Mid",
+      "Treble",
+      "Level"
+     ]
+    },
+    {
+     "index": 7,
+     "name": "Boost ED",
+     "knobs": [
+      "Gain",
+      "Grit",
+      "Level"
+     ]
+    },
+    {
+     "index": 8,
+     "name": "Compress",
+     "knobs": [
+      "Sustain",
+      "Attack",
+      "Level",
+      "Blend"
+     ]
+    },
+    {
+     "index": 9,
+     "name": "Compress Pro",
+     "knobs": [
+      "Ratio",
+      "Gain",
+      "Knee",
+      "Thd",
+      "Attack",
+      "Level",
+      "Blend"
+     ]
+    },
+    {
+     "index": 10,
+     "name": "F Compress",
+     "knobs": [
+      "Ratio",
+      "Gain",
+      "Knee",
+      "Thd",
+      "Attack",
+      "Tone",
+      "Level",
+      "Blend"
+     ]
+    },
+    {
+     "index": 11,
+     "name": "Pitch",
+     "knobs": [
+      "High Pitch",
+      "Low Pitch",
+      "High Level",
+      "Low Level",
+      "Dry Level"
+     ],
+     "defaults": [
+      12,
+      -12,
+      50,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 12,
+     "name": "Octave",
+     "knobs": [
+      "High Level",
+      "Low Level",
+      "Dry Level"
+     ]
+    },
+    {
+     "index": 13,
+     "name": "Ring",
+     "knobs": [
+      "Freq",
+      "Mix"
+     ],
+     "defaults": [
+      50,
+      50
+     ]
+    },
+    {
+     "index": 14,
+     "name": "Pitch shifter",
+     "knobs": [
+      "Semi"
+     ],
+     "defaults": [
+      0
+     ]
+    },
+    {
+     "index": 15,
+     "name": "Whammy",
+     "knobs": [
+      "Mode",
+      "Bend",
+      "Mix"
+     ],
+     "defaults": [
+      0,
+      50,
+      50
+     ]
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "GATE",
+   "models": [
+    {
+     "index": 0,
+     "name": "AI Gate",
+     "knobs": [
+      "Gate",
+      "Bias"
+     ],
+     "defaults": [
+      50,
+      50
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Soft Gate",
+     "knobs": [
+      "Thd"
+     ],
+     "defaults": [
+      -60
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Hard Gate",
+     "knobs": [
+      "Thd"
+     ],
+     "defaults": [
+      -60
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Pro Gate",
+     "knobs": [
+      "Att",
+      "Rel",
+      "Thd",
+      "Kw",
+      "Ratio"
+     ],
+     "defaults": [
+      50,
+      50,
+      -50,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 4,
+     "name": "Compress",
+     "knobs": [
+      "Sustain",
+      "Attack",
+      "Level",
+      "Blend"
+     ],
+     "defaults": [
+      50,
+      50,
+      50,
+      100
+     ]
+    },
+    {
+     "index": 5,
+     "name": "Compress Pro",
+     "knobs": [
+      "Ratio",
+      "Gain",
+      "Knee",
+      "Thd",
+      "Attack",
+      "Level",
+      "Blend"
+     ],
+     "defaults": [
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      100
+     ]
+    },
+    {
+     "index": 6,
+     "name": "F Compress",
+     "knobs": [
+      "Ratio",
+      "Gain",
+      "Knee",
+      "Thd",
+      "Attack",
+      "Tone",
+      "Level",
+      "Blend"
+     ],
+     "defaults": [
+      50,
+      50,
+      50,
+      50,
+      50,
+      60,
+      50,
+      100
+     ]
+    },
+    {
+     "index": 7,
+     "name": "AI Ms Gate",
+     "knobs": [
+      "Gate",
+      "Bias"
+     ],
+     "defaults": [
+      50,
+      50
+     ]
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "DS",
+   "models": [
+    {
+     "index": 0,
+     "name": "1BLUES_OD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ],
+     "defaults": [
+      57,
+      44,
+      51,
+      50,
+      50,
+      0,
+      88,
+      85
+     ]
+    },
+    {
+     "index": 1,
+     "name": "2TS8",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 2,
+     "name": "3DS1",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 3,
+     "name": "4DS2",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 4,
+     "name": "5M-VAVE_OD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 5,
+     "name": "6M-VAVE_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 6,
+     "name": "7M-VAVE_TS1",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 7,
+     "name": "8M-VAVE_TS2",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 8,
+     "name": "9SUPA_1",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 9,
+     "name": "10SUPA_2",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 10,
+     "name": "11RAT",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 11,
+     "name": "12RAT_BT",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 12,
+     "name": "13JHS_1",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 13,
+     "name": "14JHS_2",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 14,
+     "name": "15MT_1",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 15,
+     "name": "16MT_2",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 16,
+     "name": "17TDS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 17,
+     "name": "18XC_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 18,
+     "name": "19QC_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 19,
+     "name": "20HIGAIN",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 20,
+     "name": "21M-BOOSTER",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 21,
+     "name": "22TS-9",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 22,
+     "name": "23BIG-DR",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 23,
+     "name": "24CL_BOOST",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 24,
+     "name": "25BD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 25,
+     "name": "26M9OS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 26,
+     "name": "27M2000",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 27,
+     "name": "28DS800",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 28,
+     "name": "29DS900",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 29,
+     "name": "30MAR-DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 30,
+     "name": "31BOG_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 31,
+     "name": "32SONDO",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 32,
+     "name": "33MID-BOST",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 33,
+     "name": "34RED_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 34,
+     "name": "35MODEN_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 35,
+     "name": "36SuperOD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 36,
+     "name": "37BLUES_DR",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 37,
+     "name": "38Black-BOX",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 38,
+     "name": "39BIG-MUFF",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 39,
+     "name": "40PLX",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ],
+     "defaults": [
+      57,
+      44,
+      51,
+      50,
+      50,
+      0,
+      88,
+      85
+     ]
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "AMP",
+   "models": [
+    {
+     "index": 0,
+     "name": "1J120_CL",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ],
+     "defaults": [
+      78,
+      91,
+      74,
+      54,
+      64,
+      0,
+      81,
+      63
+     ]
+    },
+    {
+     "index": 1,
+     "name": "2J900_OD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 2,
+     "name": "3J900_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 3,
+     "name": "4J900_HV",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 4,
+     "name": "5M_BLUES",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 5,
+     "name": "6HORIZON",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 6,
+     "name": "7M-VAVE_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 7,
+     "name": "8ROOM40",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 8,
+     "name": "9FD1_BR",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 9,
+     "name": "10JOY_OD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 10,
+     "name": "11M-VAVE_TS3",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 11,
+     "name": "12MT100 LEAD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 12,
+     "name": "13RAT_CL",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 13,
+     "name": "14RAT_CR",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 14,
+     "name": "15RAT_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 15,
+     "name": "16MES_RED",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 16,
+     "name": "17FD_CH1",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 17,
+     "name": "18FD_CH1_HOT",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 18,
+     "name": "19MT80 CL",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 19,
+     "name": "20M_SUPER OD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 20,
+     "name": "21J800_CL_196",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 21,
+     "name": "22J800_CL_AMP",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 22,
+     "name": "23J800_OD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 23,
+     "name": "24J800_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 24,
+     "name": "25JOHNS_CH1",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 25,
+     "name": "26DARK_OD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 26,
+     "name": "27DARK_OD2",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 27,
+     "name": "28DARK_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 28,
+     "name": "29VXO_CL",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 29,
+     "name": "30VXO_OD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 30,
+     "name": "31VXO_OD2",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 31,
+     "name": "32VXO_OD3",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 32,
+     "name": "33OR_CL",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 33,
+     "name": "34OR_CRUNCH",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 34,
+     "name": "35HIGIAN",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 35,
+     "name": "36HIGIAN_RED",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 36,
+     "name": "37COOL_CL",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 37,
+     "name": "38JVMcrunch",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 38,
+     "name": "39JV410_BOOST",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 39,
+     "name": "40AXE",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 40,
+     "name": "41MES_CH1",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 41,
+     "name": "42M-VAVE_DS3",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 42,
+     "name": "43M-VAVE_DS4",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 43,
+     "name": "44M-VAVE LEAD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 44,
+     "name": "45LANY_CH1",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 45,
+     "name": "46LANY_CH1_BR",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 46,
+     "name": "47LANY_CH2_OD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 47,
+     "name": "48LANY_CH3_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 48,
+     "name": "49ROLANS_CL",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 49,
+     "name": "50ROLANS_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 50,
+     "name": "51ROLANS_TDS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 51,
+     "name": "52BOOSS_METEL",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 52,
+     "name": "53J900_CH1",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 53,
+     "name": "54J900_CH2",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 54,
+     "name": "55JVM_OD_FG",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 55,
+     "name": "56JVM_DS_FG",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 56,
+     "name": "57RADAL_CL_FG",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 57,
+     "name": "58RADAL_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 58,
+     "name": "59RADAL_TDS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 59,
+     "name": "60RADAL_HDS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 60,
+     "name": "61DUMBLE_FG",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 61,
+     "name": "62JAZZ_OD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 62,
+     "name": "63M-VAVE_TS1",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 63,
+     "name": "64M-VAVE_TS2",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 64,
+     "name": "65EHV5150_CH1",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 65,
+     "name": "66EHV5150_CH2",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 66,
+     "name": "67EHV5150_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 67,
+     "name": "68EHV5150_MT",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 68,
+     "name": "69XC_CL",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 69,
+     "name": "70XC_OD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 70,
+     "name": "71XC_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 71,
+     "name": "72XC_HV",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 72,
+     "name": "73J2000_CL_FG",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 73,
+     "name": "74J2000_CR_FG",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 74,
+     "name": "75J2000_TR_FG",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 75,
+     "name": "76J2000_DS_FG",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 76,
+     "name": "77J900_CL_57",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 77,
+     "name": "78J900_DS_57",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 78,
+     "name": "79MAR_METEL",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 79,
+     "name": "80MAR_HV",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 80,
+     "name": "81WS_JZCL_57",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 81,
+     "name": "82OR_CL_ECM",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 82,
+     "name": "83OR_CRUNCH",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 83,
+     "name": "84OR_SWEET",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 84,
+     "name": "85BOG_LEAD",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 85,
+     "name": "86BOG_LEAD2",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 86,
+     "name": "87BOG_LEAD3",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 87,
+     "name": "88BOG_SOLO",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 88,
+     "name": "89MATTER_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 89,
+     "name": "90UK_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 90,
+     "name": "91JHS_DS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 91,
+     "name": "92JHS_TDS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 92,
+     "name": "93M-VAVE_HOT",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 93,
+     "name": "94M-VAVE_RED",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 94,
+     "name": "95M-VAVE_MT",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 95,
+     "name": "96M-VAVE_BST",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 96,
+     "name": "97MES_CH2_57",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 97,
+     "name": "98MES_CH2_AMP",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 98,
+     "name": "99MES_CH3_57",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 99,
+     "name": "100MES_CH3_AM",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 100,
+     "name": "101AgDb750_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 101,
+     "name": "102ApSVT_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 102,
+     "name": "103DgM900_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 103,
+     "name": "104FenRum_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 104,
+     "name": "105GkF550_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 105,
+     "name": "106HkeHd50_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 106,
+     "name": "107MarkLm_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 107,
+     "name": "108OrgAd_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 108,
+     "name": "109PjBuddy_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 109,
+     "name": "110RolDb_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 110,
+     "name": "111Mb400C1_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 111,
+     "name": "112Mb400C2_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 112,
+     "name": "113DgXu_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 113,
+     "name": "114ApSp_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 114,
+     "name": "115Mar50_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 115,
+     "name": "116Mark500_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 116,
+     "name": "117PjbCub_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 117,
+     "name": "118Tc21Vt_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 118,
+     "name": "119WatMod_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ]
+    },
+    {
+     "index": 119,
+     "name": "120GKL800_BS",
+     "knobs": [
+      "Gain",
+      "Level",
+      "Bass",
+      "Middle",
+      "Treble",
+      "Reso",
+      "Pres",
+      "Bright"
+     ],
+     "defaults": [
+      78,
+      91,
+      74,
+      54,
+      64,
+      0,
+      81,
+      63
+     ]
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "name": "CAB",
+   "models": [
+    {
+     "index": 0,
+     "name": "1AC-SeVin",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ],
+     "defaults": [
+      68,
+      20,
+      117
+     ]
+    },
+    {
+     "index": 1,
+     "name": "2JVM_1960_57",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 2,
+     "name": "3JVM_G12_ECM",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 3,
+     "name": "4DELUXE REV",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 4,
+     "name": "5BOG_57",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 5,
+     "name": "6FD120_7B",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 6,
+     "name": "7HESS_212DM",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 7,
+     "name": "8HESS_212VTY",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 8,
+     "name": "9HIW412SWF",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 9,
+     "name": "10MAR1960_412",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 10,
+     "name": "11MESA_412_57",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 11,
+     "name": "12MESA_412_EC",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 12,
+     "name": "13WANGS112_EC",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 13,
+     "name": "14WANGS212_EC",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 14,
+     "name": "15V30_MC834",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 15,
+     "name": "16V30_MD421",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 16,
+     "name": "17VOX_AC30",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 17,
+     "name": "18FD_TW1971",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 18,
+     "name": "19FD_TW1980",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 19,
+     "name": "20FD_TW1988",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 20,
+     "name": "21FD_TW2000",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 21,
+     "name": "22M160_Center",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 22,
+     "name": "23MD421_Cente",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 23,
+     "name": "24Chug_L",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 24,
+     "name": "25Chug_R",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 25,
+     "name": "26EV_MIX_B",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 26,
+     "name": "27G12-EVH",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 27,
+     "name": "28G12-EVH_CT",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 28,
+     "name": "29G12-EVH_i5",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 29,
+     "name": "30G12-EVH_m16",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 30,
+     "name": "31Marshall_Bo",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 31,
+     "name": "32BGN412V30",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 32,
+     "name": "33MESA_LS",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 33,
+     "name": "34MESA_CS",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 34,
+     "name": "35MESA_HS",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 35,
+     "name": "36Recto_112",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 36,
+     "name": "37FRMAN112",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 37,
+     "name": "38OR_112",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 38,
+     "name": "39HIFI_OK",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 39,
+     "name": "40Ranll_412",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 40,
+     "name": "41OR_V30_212",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 41,
+     "name": "42OR_G75_212",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 42,
+     "name": "43RE_SUPER_41",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 43,
+     "name": "44EGNL01_412",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 44,
+     "name": "45EGNL02_412",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 45,
+     "name": "46EGNL03_412",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 46,
+     "name": "47MeOSick-II",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 47,
+     "name": "48MeOSick-III",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 48,
+     "name": "49MesaOSick-I",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 49,
+     "name": "50SoldHor",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 50,
+     "name": "51SoldSC412",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 51,
+     "name": "52AC-SeTV20",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 52,
+     "name": "53Pey5150",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 53,
+     "name": "54MRSH03",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 54,
+     "name": "55VA5153",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 55,
+     "name": "56AC-EmG212",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 56,
+     "name": "57AC-Se210",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 57,
+     "name": "58CeleAt",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 58,
+     "name": "59AC-SeGol",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 59,
+     "name": "60AC-CateEx",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 60,
+     "name": "61AC-CateFw",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 61,
+     "name": "62DieV30",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 62,
+     "name": "63EAGLProV30s",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 63,
+     "name": "64Sperimental",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 64,
+     "name": "65Peavey115",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 65,
+     "name": "66Peavey112",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 66,
+     "name": "67VxAc15",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 67,
+     "name": "68FimanVt",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 68,
+     "name": "69FenDeluX",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 69,
+     "name": "70FenProJ",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 70,
+     "name": "71Alton212",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 71,
+     "name": "72OgP412",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 72,
+     "name": "73OgV30",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 73,
+     "name": "74HaBtonV",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 74,
+     "name": "75MarMfour",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 75,
+     "name": "76Elctrovoice",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 76,
+     "name": "77J120Rolnd",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 77,
+     "name": "78MessOS",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 78,
+     "name": "79Mar60AV",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 79,
+     "name": "80WS212_57",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 80,
+     "name": "81Agula410",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 81,
+     "name": "82AmpgSVT410",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 82,
+     "name": "83AmpgSVT810",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 83,
+     "name": "84AshB115",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 84,
+     "name": "85Bareface110",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 85,
+     "name": "86Bstert115",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 86,
+     "name": "87DavEendD410",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 87,
+     "name": "88DgD210C",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 88,
+     "name": "89DgDG212N",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 89,
+     "name": "90FdBman410",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 90,
+     "name": "91FdBmanSf210",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 91,
+     "name": "92GKRB410A",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 92,
+     "name": "93GKRB410B",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 93,
+     "name": "94Hark410",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 94,
+     "name": "95MbSubway210",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 95,
+     "name": "96OgOBC212",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 96,
+     "name": "97Pey115",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 97,
+     "name": "98RanRB100",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 98,
+     "name": "99SR115",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ]
+    },
+    {
+     "index": 99,
+     "name": "100Tace412",
+     "knobs": [
+      "Level",
+      "Low Cut",
+      "High Cut"
+     ],
+     "defaults": [
+      68,
+      20,
+      117
+     ]
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "name": "EQ",
+   "models": [
+    {
+     "index": 0,
+     "name": "Guitar EQ 6",
+     "knobs": [
+      "100Hz",
+      "200Hz",
+      "400Hz",
+      "800Hz",
+      "1.6kHz",
+      "3.2kHz"
+     ],
+     "defaults": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Bass EQ 7",
+     "knobs": [
+      "50Hz",
+      "120Hz",
+      "400Hz",
+      "500Hz",
+      "800Hz",
+      "4.5kHz",
+      "10k"
+     ],
+     "defaults": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Normal EQ 10",
+     "knobs": [
+      "31.25Hz",
+      "62.5Hz",
+      "125Hz",
+      "250Hz",
+      "500Hz",
+      "1kHz",
+      "2kHz",
+      "4kHz",
+      "8kHz",
+      "16kHz"
+     ],
+     "defaults": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "name": "MOD",
+   "models": [
+    {
+     "index": 0,
+     "name": "Chorus",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      10,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Tri Chorus",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      10,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Flanger",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Fb",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      10,
+      50,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Tri Flanger",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Fb",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      10,
+      50,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 4,
+     "name": "Tremolo",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Level",
+      "Sync"
+     ],
+     "defaults": [
+      40,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 5,
+     "name": "Tri Tremolo",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Level",
+      "Sync"
+     ],
+     "defaults": [
+      40,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 6,
+     "name": "Opto Tremolo",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Level",
+      "Sync"
+     ],
+     "defaults": [
+      40,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 7,
+     "name": "Phaser",
+     "knobs": [
+      "Speed",
+      "MidCut",
+      "Reso",
+      "Fb",
+      "Sync"
+     ],
+     "defaults": [
+      10,
+      50,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 8,
+     "name": "Vibrato",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Sync"
+     ],
+     "defaults": [
+      10,
+      50
+     ]
+    },
+    {
+     "index": 9,
+     "name": "Tri Vibrato",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Sync"
+     ],
+     "defaults": [
+      10,
+      50
+     ]
+    },
+    {
+     "index": 10,
+     "name": "Opto Vibrato",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Sync"
+     ],
+     "defaults": [
+      10,
+      50
+     ]
+    },
+    {
+     "index": 11,
+     "name": "Univibe",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      10,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 12,
+     "name": "Tri Univibe",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      10,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 13,
+     "name": "Autofilter",
+     "knobs": [
+      "Speed",
+      "Min",
+      "Max",
+      "Mix",
+      "Fb",
+      "Sync"
+     ],
+     "defaults": [
+      10,
+      50,
+      50,
+      50,
+      60
+     ]
+    },
+    {
+     "index": 14,
+     "name": "Phaser Stereo",
+     "knobs": [
+      "Speed",
+      "Stage",
+      "Regen",
+      "Mix",
+      "Lfo",
+      "Sync"
+     ],
+     "defaults": [
+      12,
+      0,
+      55,
+      100,
+      0
+     ]
+    },
+    {
+     "index": 15,
+     "name": "Flanger Stereo",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Regen",
+      "Mix",
+      "Jet",
+      "Lfo",
+      "Sync"
+     ],
+     "defaults": [
+      3,
+      75,
+      75,
+      100,
+      20,
+      0
+     ]
+    },
+    {
+     "index": 16,
+     "name": "Vibe Stereo",
+     "knobs": [
+      "Speed",
+      "Stage",
+      "Regen",
+      "Mix",
+      "Lfo",
+      "Sync"
+     ],
+     "defaults": [
+      15,
+      0,
+      80,
+      100,
+      4
+     ]
+    },
+    {
+     "index": 17,
+     "name": "Chorus Stereo",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Mode",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      20,
+      70,
+      0,
+      50
+     ]
+    },
+    {
+     "index": 18,
+     "name": "Tremolo Stereo",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Level",
+      "Mode",
+      "Sync"
+     ],
+     "defaults": [
+      40,
+      90,
+      50,
+      0
+     ]
+    },
+    {
+     "index": 19,
+     "name": "Vibrato Stereo",
+     "knobs": [
+      "Speed",
+      "Depth",
+      "Bits",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      5,
+      25,
+      0,
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "name": "DLY",
+   "models": [
+    {
+     "index": 0,
+     "name": "Clean",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Modern",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Phaser",
+      "Mod",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Echo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Analog",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50
+     ]
+    },
+    {
+     "index": 4,
+     "name": "Duck",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Release",
+      "Speed",
+      "Depth",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50,
+      50,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 5,
+     "name": "Dtype",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Grit",
+      "Speed",
+      "Depth",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50,
+      30,
+      15,
+      15
+     ]
+    },
+    {
+     "index": 6,
+     "name": "Tremolo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Pattern",
+      "Speed",
+      "Depth",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50,
+      9,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 7,
+     "name": "Filter",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Filter",
+      "Speed",
+      "Depth",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50,
+      50,
+      15,
+      15
+     ]
+    },
+    {
+     "index": 8,
+     "name": "Dual",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "T-Mode",
+      "Speed",
+      "Depth",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50,
+      0,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 9,
+     "name": "Lofi",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Grit",
+      "Speed",
+      "Depth",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50,
+      50,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 10,
+     "name": "Pattern",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Pattern",
+      "Speed",
+      "Depth",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50,
+      8,
+      50,
+      50
+     ]
+    },
+    {
+     "index": 11,
+     "name": "Ice",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Pitch",
+      "Mod",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50,
+      6,
+      50
+     ]
+    },
+    {
+     "index": 12,
+     "name": "Reverse",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Phaser",
+      "Mod",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50,
+      10,
+      15
+     ]
+    },
+    {
+     "index": 13,
+     "name": "PingPong Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50
+     ]
+    },
+    {
+     "index": 14,
+     "name": "Clean Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50
+     ]
+    },
+    {
+     "index": 15,
+     "name": "Modern Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Sync"
+     ]
+    },
+    {
+     "index": 16,
+     "name": "Echo Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Sync"
+     ]
+    },
+    {
+     "index": 17,
+     "name": "Analog Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Release",
+      "Speed",
+      "Depth",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50,
+      0,
+      80,
+      0
+     ]
+    },
+    {
+     "index": 18,
+     "name": "Duck Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Grit",
+      "Speed",
+      "Depth",
+      "Sync"
+     ]
+    },
+    {
+     "index": 19,
+     "name": "Dtype Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Pattern",
+      "Speed",
+      "Depth",
+      "Sync"
+     ]
+    },
+    {
+     "index": 20,
+     "name": "Tremolo Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Filter",
+      "Speed",
+      "Depth",
+      "Sync"
+     ]
+    },
+    {
+     "index": 21,
+     "name": "Filter Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "T-Mode",
+      "Speed",
+      "Depth",
+      "Sync"
+     ]
+    },
+    {
+     "index": 22,
+     "name": "Dual Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Grit",
+      "Speed",
+      "Depth",
+      "Sync"
+     ]
+    },
+    {
+     "index": 23,
+     "name": "Lofi Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Pattern",
+      "Speed",
+      "Depth",
+      "Sync"
+     ]
+    },
+    {
+     "index": 24,
+     "name": "Pattern Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Pitch",
+      "Mod",
+      "Sync"
+     ]
+    },
+    {
+     "index": 25,
+     "name": "Ice Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Phaser",
+      "Mod",
+      "Sync"
+     ]
+    },
+    {
+     "index": 26,
+     "name": "Reverse Stereo",
+     "knobs": [
+      "Time",
+      "Fb",
+      "Mix",
+      "Phaser",
+      "Mod",
+      "Sync"
+     ],
+     "defaults": [
+      500,
+      30,
+      50,
+      10,
+      15
+     ]
+    }
+   ]
+  },
+  {
+   "id": 9,
+   "name": "REV",
+   "models": [
+    {
+     "index": 0,
+     "name": "Room",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "High Pass",
+      "Low Pass",
+      "Mod Depth"
+     ],
+     "defaults": [
+      20,
+      30,
+      80,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Hall",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "High Pass",
+      "Low Pass",
+      "Mod Depth"
+     ],
+     "defaults": [
+      20,
+      30,
+      80,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Plate",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "High Pass",
+      "Low Pass",
+      "Mod Depth"
+     ],
+     "defaults": [
+      20,
+      30,
+      80,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Spring",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "High Pass",
+      "Low Pass",
+      "Combs"
+     ],
+     "defaults": [
+      20,
+      30,
+      80,
+      80,
+      50
+     ]
+    },
+    {
+     "index": 4,
+     "name": "Shimmer",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "Tone",
+      "Pitch",
+      "Amount"
+     ],
+     "defaults": [
+      20,
+      30,
+      80,
+      40,
+      30
+     ]
+    },
+    {
+     "index": 5,
+     "name": "Bloom",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "Tone",
+      "Lend",
+      "Length"
+     ],
+     "defaults": [
+      10,
+      30,
+      80,
+      40,
+      30
+     ]
+    },
+    {
+     "index": 6,
+     "name": "Cloud",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "High Pass",
+      "Low Pass",
+      "Diff"
+     ],
+     "defaults": [
+      20,
+      30,
+      40,
+      40,
+      10
+     ]
+    },
+    {
+     "index": 7,
+     "name": "Lofi",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "Sample Rate",
+      "Noise Level",
+      "Mod Depth"
+     ],
+     "defaults": [
+      20,
+      30,
+      80,
+      40,
+      30
+     ]
+    },
+    {
+     "index": 8,
+     "name": "Swell",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "Tone",
+      "Lend",
+      "Rise Time"
+     ],
+     "defaults": [
+      20,
+      30,
+      80,
+      40,
+      30
+     ]
+    },
+    {
+     "index": 9,
+     "name": "Room stereo",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "High Pass",
+      "Low Pass",
+      "Mod Depth"
+     ],
+     "defaults": [
+      20,
+      25,
+      30,
+      40,
+      30
+     ]
+    },
+    {
+     "index": 10,
+     "name": "Hall stereo",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "High Pass",
+      "Low Pass",
+      "Mod Depth"
+     ],
+     "defaults": [
+      40,
+      35,
+      60,
+      65,
+      35
+     ]
+    },
+    {
+     "index": 11,
+     "name": "Plate stereo",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "High Pass",
+      "Low Pass",
+      "Mod Depth"
+     ],
+     "defaults": [
+      70,
+      30,
+      80,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 12,
+     "name": "Spring stereo",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "High Pass",
+      "Low Pass",
+      "Combs"
+     ],
+     "defaults": [
+      25,
+      20,
+      60,
+      60,
+      40
+     ]
+    },
+    {
+     "index": 13,
+     "name": "Shimmer stereo",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "Tone",
+      "Pitch",
+      "Amount"
+     ],
+     "defaults": [
+      75,
+      20,
+      60,
+      100,
+      100
+     ]
+    },
+    {
+     "index": 14,
+     "name": "Bloom stereo",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "Tone",
+      "Lend",
+      "Length"
+     ],
+     "defaults": [
+      40,
+      40,
+      25,
+      60,
+      40
+     ]
+    },
+    {
+     "index": 15,
+     "name": "Cloud stereo",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "High Pass",
+      "Low Pass",
+      "Diff"
+     ],
+     "defaults": [
+      30,
+      40,
+      50,
+      50,
+      40
+     ]
+    },
+    {
+     "index": 16,
+     "name": "Lofi stereo",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "Sample Rate",
+      "Noise Level",
+      "Mod Depth"
+     ]
+    },
+    {
+     "index": 17,
+     "name": "Swell stereo",
+     "knobs": [
+      "Decay",
+      "Mix",
+      "Tone",
+      "Lend",
+      "Rise Time"
+     ],
+     "defaults": [
+      60,
+      30,
+      60,
+      30,
+      15
+     ]
+    }
+   ]
+  },
+  {
+   "id": 10,
+   "name": "VOL",
+   "models": [
+    {
+     "index": 0,
+     "name": "VOL",
+     "knobs": [
+      "VOL"
+     ]
+    }
+   ]
+  }
+ ],
+ "note": "Model lists read from the M-EFCS 3.7.1413 dropdowns (index = position, DS/AMP/CAB names carry their 1-based number); knob names from the editor's panel; defaults read from the pedal (firmware V73) right after selecting the model. Speed/Time knobs are stored x10 / in ms (Speed 2.5 = 25, Time 0.5 s = 500); negative values are int16."
+}

@@ -1,0 +1,14 @@
+{
+  "name": "mvave-mk-300",
+  "owner": {
+    "name": "João Paulo",
+    "url": "https://github.com/jpfaria/mvave-mk-300"
+  },
+  "plugins": [
+    {
+      "name": "mk300",
+      "source": "./",
+      "description": "Control an M-VAVE MK-300 over USB (SysEx) from Claude: presets, models, knobs, block on/off, globals, re-amp. Two skills: mk300 (configure the pedal) and tone-builder (a song's tone as a preset)."
+    }
+  ]
+}

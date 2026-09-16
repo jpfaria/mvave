@@ -30,6 +30,7 @@ SPACE_STATUS = 0x2   # 86-byte status block the editor polls every second
 SPACE_COMMAND = 0xE  # "load preset N" = write 01 at offset N
 
 HEADER_LEN = 14
+GLOBAL_SIZE = 86      # bytes in the global-settings block (space 2)
 ACK = bytes.fromhex("f0 00 32 01 08 00 00 00 00 7f 01 f7")
 
 
@@ -143,5 +144,5 @@ def load_preset(index: int) -> bytes:
     return build(CLS_WRITE, CMD_WRITE_U8, index, 1, SPACE_COMMAND, b"\x01")
 
 
-POLL = read(0, 86, SPACE_STATUS)          # what the editor sends every second
+POLL = read(0, GLOBAL_SIZE, SPACE_STATUS)          # what the editor sends every second
 READ_PRESET = read(0, 448, SPACE_PRESET)  # the whole edit buffer
