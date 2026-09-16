@@ -25,9 +25,11 @@ CMD_READ = 0x41
 CMD_WRITE_U8 = 0x49  # 1-byte fields: models, on/off, load preset
 CMD_WRITE_U16 = 0x51 # 2-byte fields: knobs, preset vol / pan / bpm
 
+SPACE_BANK = 0x0     # preset flash bank: 160 x 448 bytes, addressed by byte offset (slot * 448)
 SPACE_PRESET = 0x1   # the edit buffer (448-byte preset struct)
 SPACE_STATUS = 0x2   # 86-byte status block the editor polls every second
 SPACE_COMMAND = 0xE  # "load preset N" = write 01 at offset N
+SPACE_COMMIT = 0xF   # "commit the bank write" = cls 09 cmd 41 field 0 len 0, no payload
 
 HEADER_LEN = 14
 GLOBAL_SIZE = 86      # bytes in the global-settings block (space 2)
@@ -143,6 +145,17 @@ def load_preset(index: int) -> bytes:
     """0-based preset index (editor label [001] = 0)."""
     return build(CLS_WRITE, CMD_WRITE_U8, index, 1, SPACE_COMMAND, b"\x01")
 
+
+def write_preset_image(slot: int, image: bytes) -> bytes:
+    """The editor's "Save to": the 448-byte preset image into flash slot `slot` (0-based).
+    CMD is 0x41 with the second 7-bit digit = number of 16-byte chunks (448/16 = 0x1C).
+    Must be followed by COMMIT and (as the editor does) a load of that slot."""
+    if len(image) != 448:
+        raise ValueError("preset image must be 448 bytes")
+    return build(CLS_WRITE, CMD_READ | ((len(image) // 16) << 7), slot * 448, len(image), SPACE_BANK, image)
+
+
+COMMIT = build(CLS_WRITE, CMD_READ, 0, 0, SPACE_COMMIT)   # F0 00 32 09 41 00 00 00 02 00 00 00 00 0F 00 00 00 0B 00 F7
 
 POLL = read(0, GLOBAL_SIZE, SPACE_STATUS)          # what the editor sends every second
 READ_PRESET = read(0, 448, SPACE_PRESET)  # the whole edit buffer

@@ -30,9 +30,19 @@ Ack for every write: `F0 00 32 01 08 00 00 00 00 7F 01 F7`.
 
 | space | content | seen |
 |---|---|---|
+| `0` | the **preset flash bank**: 160 × 448 bytes, byte offset = `slot × 448`. Read any slot without loading it (`read slot*448 / 448`, verified: slot 0 == the editor's factory record). Written by the editor's *Save to*: `cls 09`, `cmd 41` with the second 7-bit digit = `len/16` (`41 1C`), field `slot*448`, len 448, the 448-byte image as payload, then COMMIT, then a load of that slot | write to slot 159 and read-back verified live |
 | `1` | the **edit buffer**: the 448-byte preset struct below | read 0/448 (whole preset), read 0x42/24 (one block's knobs), writes of 1–2 bytes at any offset |
-| `2` | 86-byte **status** block, polled by the editor once per second (`read 0 len 86`); byte 0 = current preset index | |
+| `2` | 86-byte **global / status** block, polled by the editor once per second (`read 0 len 86`): byte 0 = current preset index, 0x38 A/B Convert (0/1), 0x3C RCH (0 Nor, 1 Dry, 2 NoCAB), 0x3D USB Audio (0 ON, 1 OFF, 2 RESAMPLE, 3 DRY); the editor writes them with `write_u8` in space 2 | |
 | `E` | **commands**: `write_u8(offset = preset index, 01)` loads that preset (0-based; editor label `[001]` = 0). The pedal acks, then the editor reads the edit buffer | |
+| `F` | **commit**: `F0 00 32 09 41 00 00 00 02 00 00 00 00 0F 00 00 00 0B 00 F7` (cls 09, cmd 41, field 0, len 0, no payload) right after a bank write. The flash write takes a few seconds; commands sent meanwhile may cancel it — `mk300` waits until the slot reads back the new image before loading it | |
+
+MIDI Monitor showed the editor's bank-write header as `09 41 1C 00 00 02 40 2C 04 00 38 00 00 4A …`
+(one `00` fewer than the 4+4-digit header `mk300` sends); the pedal accepts the 4+4 form and the
+slot changes, so that is what the library uses.
+
+The pedal is also a 2-in/2-out 44.1 kHz USB audio interface (`USB-Audio`). With USB Audio =
+RESAMPLE, USB playback goes through the effect chain and comes back on the USB input (a −20 dBFS
+sine returned at −26 dBFS through JM-CL; DRY returns silence) — that is `mk300 reamp`.
 
 ## Preset struct (448 bytes, space 1; identical to the records of the editor's factory bank `mk300_am4_preset.bin` = 160 × 448 + "PATCHEND")
 
@@ -71,7 +81,43 @@ model defaults and the editor re-reads `0x42 + 24·b`, 24 bytes). On/off of bloc
 | FX off | `F0 00 32 09 49 00 00 00 02 2C 00 00 00 11 00 00 00 00 7C 02 F7` |
 | load preset [003] | `F0 00 32 09 49 00 00 00 02 02 00 00 00 1E 00 00 00 01 2E 00 F7` (sent twice by the editor) |
 
-## Not captured yet
+| FX off | `F0 00 32 09 49 00 00 00 02 2C 00 00 00 11 00 00 00 00 7C 02 F7` |
+| RCH = Dry (global) | `F0 00 32 09 49 00 00 00 02 3C 00 00 00 12 00 00 00 01 3A 02 F7` (space 2) |
+| Save to [160] | 532-byte bank write (above) + COMMIT + load `F0 00 32 09 49 00 00 00 02 1F 01 00 00 1E 00 00 00 01 74 01 F7` |
 
-Save to flash, rename, chain reorder, global settings, EQ / looper / drum pages, IR / AMP / DS
-uploads, footswitch assignments, what the pedal broadcasts when a footswitch changes the preset.
+## Knob values
+
+int16 little-endian. 0–100 for most knobs; `Speed` ×10 (2.5 Hz = 25); delay `Time` in ms;
+EQ bands and gate thresholds in dB (negative = two's complement, `Thd` −60 = `C4 FF`); `Sync` 0/1.
+`DS`, `AMP` and `CAB` keep their knob values across a model change; the other blocks are reset to
+the model's defaults (recorded in `mk300/catalog.json`).
+
+## Not captured
+
+Rename / chain reorder as the editor does them (`mk300` writes those bytes one by one with
+`write_u8`, verified by read-back), the other global fields (Sync, Pedal State, toe switches, BT/USB
+volumes — the editor's clicks were not observed writing them), the EQ / Looper / Drum pages, IR / AMP /
+DS `.am3Data` uploads (Sounds and Import pages), footswitch assignments (bytes 0x14A… of the preset),
+what the pedal broadcasts when a footswitch changes the preset (nothing beyond byte 0 of the polled
+global block changing; `mk300 listen` polls it).
+
+## Official MIDI CC map (from M-VAVE's "MK300 MIDI Control Mapping Table", firmware V73)
+
+Channel 1 (`B0`). ≥ 64 = ON / execute, < 64 = OFF.
+
+| CC | Function |
+|---|---|
+| 21 | Looper toggle (127: Record → Play → Overdub) / 0: Stop |
+| 22 | Drum play/stop |
+| 23 | Drum BPM follow |
+| 32 | Looper stop |
+| 33 | Looper undo / clear |
+| 34 / 35 | AutoRecord one-shot / hold mode |
+| 36 | Loop point toggle (127 tail / 0 head) |
+| 37 / 39 | Drum sync mode 1 / 2 |
+| 50–53 | FS1, FS2, CtrlA, CtrlB short press |
+| 54–57 | FS1, FS2, CtrlA, CtrlB long press |
+| 58 | RCH output mode 0 Nor / 1 Dry / 2 NoCAB |
+| 59 | USB audio type 0 Nor / 1 No / 2 Resample / 3 Dry |
+| 60 | BT & USB playback volume 0–100 |
+| 61 | USB recording return volume 0–100 (50 = 0 dB) |

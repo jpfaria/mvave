@@ -56,3 +56,15 @@ def test_bad_checksum_rejected():
     bad[-3] ^= 1
     with pytest.raises(ValueError):
         p.parse(bytes(bad))
+
+
+def test_save_to_matches_editor_header():
+    # Editor "Save to [160]" on 2026-09-16, 532 bytes. MIDI Monitor's row showed
+    # F0 00 32 09 41 1C 00 00 02 40 2C 04 00 38 00 00 4A 1A 35 ... (one 00 fewer than the 4+4-digit
+    # header below); the pedal accepted this encoding and the flash slot changed (checked live).
+    image = bytes.fromhex(open("tests/fixtures/jm-od.hex").read())
+    fr = p.write_preset_image(159, image)
+    assert fr[:18].hex(" ") == "f0 00 32 09 41 1c 00 00 02 40 2c 04 00 00 38 00 00 4a"
+    assert len(fr) == 532
+    assert p.COMMIT.hex(" ") == "f0 00 32 09 41 00 00 00 02 00 00 00 00 0f 00 00 00 0b 00 f7"
+    assert p.load_preset(159).hex(" ") == "f0 00 32 09 49 00 00 00 02 1f 01 00 00 1e 00 00 00 01 74 01 f7"

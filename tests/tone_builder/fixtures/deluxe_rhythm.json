@@ -1,0 +1,7 @@
+{ "song": "Test Song", "artist": "Test Artist", "role": "rhythm", "id": "test_artist_test_song_rhythm",
+  "name": "Test Artist - Test Song (rhythm)", "tempo_bpm": 66,
+  "amp": { "name": "Fender Blackface Deluxe Reverb normal channel", "brand": "fender", "params": {"gain": 35, "treble": 55}, "sources": ["https://tonedb.co/x"] },
+  "drives": [ { "name": "Ibanez TS808", "brand": "ibanez", "params": {"drive": 20, "level": 60, "unknown_knob": 1}, "provenance": "sourced", "sources": ["https://tonedb.co/x"] } ],
+  "cab": null,
+  "fx": [ { "type": "gate", "name": "ISP Decimator noise gate", "params": {"threshold": 38}, "provenance": "unverified", "sources": [] },
+          { "type": "delay", "name": "mono analog delay", "params": {"time_ms": 454, "feedback": 28, "mix": 30}, "provenance": "derived", "sources": ["https://tonedb.co/x"] } ] }

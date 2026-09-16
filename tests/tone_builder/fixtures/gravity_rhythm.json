@@ -1,0 +1,15 @@
+{
+  "song": "Gravity", "artist": "John Mayer", "role": "rhythm",
+  "id": "john_mayer_gravity_rhythm", "name": "John Mayer - Gravity (rhythm)",
+  "tempo_bpm": 66,
+  "amp":    { "name": "Dumble Overdrive Special", "brand": "dumble",
+              "params": { "gain": 35 }, "provenance": "sourced", "sources": ["https://example.org/rig"] },
+  "drives": [ { "name": "Ibanez TS808", "brand": "ibanez", "params": { "gain": 20, "level": 60 },
+                "provenance": "sourced", "sources": ["https://example.org/rig"] } ],
+  "cab":    { "name": "Marshall 1960 4x12", "params": {}, "provenance": "derived", "sources": ["https://example.org/rig"] },
+  "fx":     [ { "type": "gate", "name": "noise gate", "params": { "threshold": -40 },
+                "provenance": "unverified", "sources": [] },
+              { "type": "delay", "name": "analog delay",
+                "params": { "time_ms": 454, "feedback": 28, "mix": 30 },
+                "provenance": "derived", "sources": ["https://example.org/rig"] } ]
+}

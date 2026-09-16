@@ -102,6 +102,73 @@ def _simple_u16(offset):
     return run
 
 
+def cmd_presets(a):
+    with _dev(a) as d:
+        cur = d.current_preset_index()
+        for i in range(160):
+            print(f"{'*' if i == cur else ' '} [{i + 1:03d}] {d.read_slot(i).name}")
+
+
+def cmd_read(a):
+    with _dev(a) as d:
+        ps = d.read_slot(_slot(a.preset))
+    if a.hex:
+        print(ps.raw.hex())
+    else:
+        print(show_preset(ps, _slot(a.preset)))
+
+
+def cmd_save(a):
+    """Store the edit buffer into slot N under NAME (the editor's "Save to")."""
+    slot = _slot(a.preset)
+    with _dev(a) as d:
+        target = d.read_slot(slot).name
+        if target and not target.startswith("USER PRESET") and not a.overwrite:
+            sys.exit(f"[{slot + 1:03d}] is named {target!r}: pass --overwrite to replace it")
+        img = bytearray(d.read_preset().raw)
+        img[0:20] = a.name.encode("latin-1")[:20].ljust(20, b"\0")
+        d.save_preset(slot, bytes(img))
+        print(show_preset(d.read_preset(), slot))
+
+
+def cmd_copy(a):
+    src, dst = _slot(a.src), _slot(a.dst)
+    with _dev(a) as d:
+        target = d.read_slot(dst).name
+        if target and not target.startswith("USER PRESET") and not a.overwrite:
+            sys.exit(f"[{dst + 1:03d}] is named {target!r}: pass --overwrite to replace it")
+        img = bytearray(d.read_slot(src).raw)
+        if a.name:
+            img[0:20] = a.name.encode("latin-1")[:20].ljust(20, b"\0")
+        d.save_preset(dst, bytes(img))
+        print(f"[{src + 1:03d}] -> [{dst + 1:03d}] {pr.Preset(bytes(img)).name}")
+
+
+def cmd_rename(a):
+    with _dev(a) as d:
+        d.write_bytes(pr.OFF_NAME, a.name.encode("latin-1")[:20].ljust(20, b"\0"))
+        print(d.read_preset().name)
+
+
+def cmd_chain(a):
+    ids = [_block(b) for b in a.blocks]
+    if sorted(ids) != list(range(11)):
+        sys.exit("give all 11 blocks once: " + " ".join(pr.BLOCKS))
+    with _dev(a) as d:
+        d.write_bytes(pr.OFF_CHAIN, bytes(ids))
+        print(" > ".join(pr.BLOCKS[b] for b in d.read_preset().chain))
+
+
+def cmd_reamp(a):
+    from .reamp import reamp, NoSignal
+    with _dev(a) as d:
+        try:
+            r = reamp(a.di, a.out, tail_s=a.tail, mono=a.mono, device=d)
+        except NoSignal as e:
+            sys.exit(f"no signal: {e}")
+    print(f"{a.out}: {r.frames} frames, {r.rms_db} dBFS")
+
+
 def cmd_global(a):
     with _dev(a) as d:
         g = d.read_global()
@@ -185,6 +252,17 @@ def main(argv=None):
     s = sub.add_parser("volume", help="preset volume 0-100"); s.add_argument("value"); s.set_defaults(fn=_simple_u16(pr.OFF_VOL))
     s = sub.add_parser("bpm", help="preset tempo"); s.add_argument("value"); s.set_defaults(fn=_simple_u16(pr.OFF_BPM))
     s = sub.add_parser("pan", help="preset pan: 0 = C, +17 = R17, negative = L"); s.add_argument("value"); s.set_defaults(fn=_simple_u16(pr.OFF_PAN))
+    s = sub.add_parser("presets", help="the 160 stored presets (* = current)"); s.set_defaults(fn=cmd_presets)
+    s = sub.add_parser("read", help="a stored preset straight from flash, without loading it"); s.add_argument("preset"); s.add_argument("--hex", action="store_true"); s.set_defaults(fn=cmd_read)
+    s = sub.add_parser("save", help="store the edit buffer into slot N as NAME (refuses a named slot without --overwrite)")
+    s.add_argument("preset"); s.add_argument("name"); s.add_argument("--overwrite", action="store_true"); s.set_defaults(fn=cmd_save)
+    s = sub.add_parser("copy", help="copy a stored preset to another slot: copy 3 150 [NAME]")
+    s.add_argument("src"); s.add_argument("dst"); s.add_argument("name", nargs="?"); s.add_argument("--overwrite", action="store_true"); s.set_defaults(fn=cmd_copy)
+    s = sub.add_parser("rename", help="rename the edit buffer (save afterwards)"); s.add_argument("name"); s.set_defaults(fn=cmd_rename)
+    s = sub.add_parser("chain", help="signal order of the 11 blocks: chain WAH FX GATE DS AMP CAB EQ MOD REV DLY VOL (unverified in the editor: byte-wise writes)")
+    s.add_argument("blocks", nargs=11); s.set_defaults(fn=cmd_chain)
+    s = sub.add_parser("reamp", help="play DI.wav through the pedal over USB audio (USB Audio = RESAMPLE) and record OUT.wav")
+    s.add_argument("di"); s.add_argument("out"); s.add_argument("--tail", type=float, default=2.0); s.add_argument("--mono", action="store_true"); s.set_defaults(fn=cmd_reamp)
     s = sub.add_parser("global", help="read the global block (space 2)"); s.set_defaults(fn=cmd_global)
     s = sub.add_parser("global-set", help="write ONE known global field: global-set rch Dry"); s.add_argument("name"); s.add_argument("value"); s.set_defaults(fn=cmd_global_set)
     s = sub.add_parser("models", help="catalog: models of a block"); s.add_argument("block"); s.set_defaults(fn=cmd_models)

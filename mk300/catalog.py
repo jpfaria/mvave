@@ -28,7 +28,7 @@ def model(block: str, index: int) -> dict:
 
 def find_model(block: str, name: str) -> dict:
     """Exact (case-insensitive) name, else the number prefix of DS/AMP/CAB names ('53' -> '53J900_CH1'),
-    else a unique substring match."""
+    else a unique substring match, else a bare 0-based index."""
     ms = models(block)
     low = name.lower()
     for m in ms:
@@ -41,6 +41,8 @@ def find_model(block: str, name: str) -> dict:
     hits = [m for m in ms if low in m["name"].lower()]
     if len(hits) == 1:
         return hits[0]
+    if name.isdigit() and int(name) < len(ms):
+        return ms[int(name)]          # bare 0-based index (blocks whose names carry no number)
     raise KeyError(f"{block}: no model {name!r}" + (f" (candidates: {[m['name'] for m in hits]})" if hits else ""))
 
 

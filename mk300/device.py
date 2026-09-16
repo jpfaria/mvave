@@ -87,14 +87,61 @@ class MK300:
     def read_preset(self) -> Preset:
         return Preset(self.read(0, PRESET_SIZE))
 
-    def load_preset(self, index: int) -> None:
-        self.write(p.load_preset(index))
+    def read_slot(self, slot: int) -> Preset:
+        """A stored preset straight from flash (space 0), without loading it."""
+        return Preset(self.read(slot * PRESET_SIZE, PRESET_SIZE, p.SPACE_BANK, timeout=3.0))
+
+    def preset_names(self) -> list[str]:
+        return [self.read_slot(i).name for i in range(160)]
+
+    def write_bytes(self, field: int, data: bytes, space: int = p.SPACE_PRESET) -> None:
+        """Byte-wise writes (u8 per byte) - used for the name and the chain order."""
+        for i, b in enumerate(data):
+            self.set_u8(field + i, b, space)
+
+    def load_preset(self, index: int, timeout: float = 10.0) -> None:
+        """Load flash slot `index` into the edit buffer and wait until the pedal reports it as
+        current (the buffer is refilled asynchronously; right after a flash write the ack can lag)."""
+        deadline = time.monotonic() + timeout
+        while time.monotonic() < deadline:
+            try:
+                self.write(p.load_preset(index))
+            except TimeoutError:
+                pass                   # busy (e.g. right after a flash write): check the result and retry
+            for _ in range(5):
+                try:
+                    if self.current_preset_index() == index:
+                        time.sleep(0.3)
+                        return
+                except TimeoutError:
+                    pass
+                time.sleep(0.2)
+        raise TimeoutError(f"preset {index + 1} did not become current")
 
     def set_u8(self, field: int, value: int, space: int = p.SPACE_PRESET) -> None:
         self.write(p.write_u8(field, value, space))
 
     def set_u16(self, field: int, value: int, space: int = p.SPACE_PRESET) -> None:
         self.write(p.write_u16(field, value, space))
+
+    def save_preset(self, slot: int, image: bytes) -> None:
+        """Write a 448-byte image to flash slot `slot` (0-based) the way the editor's "Save to"
+        does: bulk write, commit, then load that slot (so the edit buffer shows it)."""
+        self.write(p.write_preset_image(slot, image), timeout=5.0)
+        self.write(p.COMMIT, timeout=5.0)
+        # the flash write takes a moment; sending more commands meanwhile can lose it. Wait until
+        # the slot reads back with the new image before loading it.
+        deadline = time.monotonic() + 15.0
+        while time.monotonic() < deadline:
+            try:
+                if self.read_slot(slot).raw == image:
+                    break
+            except TimeoutError:
+                pass
+            time.sleep(0.5)
+        else:
+            raise TimeoutError(f"slot {slot + 1} does not read back the written image")
+        self.load_preset(slot)
 
     # -- global block (space 2) --------------------------------------------------------
     def read_global(self) -> bytes:
