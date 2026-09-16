@@ -3,7 +3,7 @@
 Measured on 2026-09-16 by spying on the M-EFCS editor (macOS, `com.digAmp.dgAmp` 3.7.1413,
 Flutter + `flutter_midi_command`) with MIDI Monitor while it talked to an MK-300 on firmware
 V73 over USB (CoreMIDI port `USB Composite Device`). Reproduced by the `mk300` package;
-golden vectors in `tests/test_protocol.py`, raw captures in `docs/captures/`.
+golden vectors in `tests/test_protocol.py`, raw captures in `docs/captures/` (`from-pedal.log.gz` = every frame the pedal sent during the session, `model_defaults.jsonl`, `knobs.json`).
 
 ## Frame
 
