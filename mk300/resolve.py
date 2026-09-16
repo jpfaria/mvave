@@ -27,7 +27,8 @@ ALIASES = {  # real-world token -> tokens that appear in MK-300 names
     "klon": ["gold", "cl_boost", "supa"], "centaur": ["gold"], "big muff": ["big-muff", "muff"], "fuzz face": ["face"], "ocd": ["ocd"], "fulltone": ["ocd"],
     "xotic": ["xep", "xc", "boost"], "booster": ["boost"], "boost": ["boost", "bst", "cl_boost"], "ep": ["xep"], "ep booster": ["xep"], "horizon": ["horizon", "hrz"], "precision drive": ["horizon", "hrz"], "plumes": ["eqp"], "earthquaker": ["eqp"],
     "jhs": ["jhs"], "morning glory": ["jhs"], "bluesbreaker": ["blues_od", "m_blues"], "timmy": ["tds"], "suhr": ["supa"], "riot": ["supa"],
-    "celestion": ["v30", "g12", "g75"], "vintage 30": ["v30"], "greenback": ["g12"], "1960": ["1960"], "4x12": ["412"], "2x12": ["212"], "1x12": ["112"], "4x10": ["410"], "1x15": ["115"],
+    "celestion": ["v30", "g12", "g75"],
+    "crunch": ["od", "cr", "crunch", "od2"], "clean": ["cl", "jzcl"], "overdrive": ["od"], "lead": ["lead", "ds", "solo"], "distortion": ["ds"], "high gain": ["hv", "hds", "tds", "mt", "higian"], "metal": ["mt", "metel", "tds"], "bass": ["bs"], "vintage 30": ["v30"], "greenback": ["g12"], "1960": ["1960"], "4x12": ["412"], "2x12": ["212"], "1x12": ["112"], "4x10": ["410"], "1x15": ["115"],
 }
 
 
