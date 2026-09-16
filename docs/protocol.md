@@ -48,7 +48,9 @@ sine returned at −26 dBFS through JM-CL; DRY returns silence) — that is `mk3
 
 | Offset | Size | Content |
 |---|---|---|
-| 0x00 | 20 | name, NUL-padded |
+| 0x00 | 20 | name, NUL-padded. O **visor da pedaleira só relê o nome no boot**: depois de um
+`save`/`rename` o slot já lê de volta com o nome novo (`mk300 read N`) e a tela continua mostrando
+o antigo, inclusive depois de um `load` desse mesmo slot. Desligar e ligar atualiza (16/09). |
 | 0x14 | 4 | `FF 90 1E 00` in every factory preset (unknown) |
 | 0x18 | u16 | Preset Vol (0–100) |
 | 0x1A | u16 | BPM |

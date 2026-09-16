@@ -228,7 +228,7 @@ def apply_plan(plan: Plan, preset: str, name: str, runner: Runner, overwrite: bo
     used = {s.block for s in plan.slots}
     seq = [["load", preset]]
     for s in plan.slots:
-        seq.append(["model", s.block, str(s.model_index)])
+        seq.append(["model", s.block, s.model])   # by name: a bare number is read as the name prefix ("60" -> 60RADAL_HDS), not the index
     for s in plan.slots:
         for k in s.knobs:
             if k.origin != "default":
