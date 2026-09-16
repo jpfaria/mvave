@@ -54,8 +54,9 @@ def _matches(w: str, ntoks: set[str]) -> bool:
 
 
 def resolve(block: str, query: str) -> list[tuple[dict, float]]:
-    """Score = mean over query tokens of: 1 when the token (or a model-specific alias of it) is in
-    the name, 0.5 when only a brand-level alias hits (so 'Marshall JCM800' ranks J800 above J900)."""
+    """Score = mean over query tokens of: 1 when the token itself is in the name, 0.75 when a
+    model-specific alias of it is ('jcm800' -> j800), 0.5 when only a brand-level alias hits (so
+    'Marshall JCM800' ranks J800 above J900 and 'Dumble Overdrive Special' ranks DUMBLE above every _OD)."""
     q = _tokens(query)
     scored = []
     for m in cat.models(block):
@@ -68,7 +69,7 @@ def resolve(block: str, query: str) -> list[tuple[dict, float]]:
             elif t in BRAND_WORDS:
                 total += 0.5 if any(_matches(w, ntoks) for w in _wanted(t)) else 0.0
             elif any(_matches(w, ntoks) for w in _wanted(t)):
-                total += 1.0
+                total += 0.75          # an alias hit ('overdrive' -> _OD) counts less than the unit's own name
         if total:
             score = total / max(1, len(q))
             bare = name.replace("_", " ").replace("-", " ").strip()
