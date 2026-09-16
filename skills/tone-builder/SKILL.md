@@ -75,6 +75,9 @@ cited gear; give me an isolated-guitar WAV and I'll tune it, or tell me what's o
   as `derived` (scale to 0-100), everything unsourced stays at the catalog default.
 - **Knobs from a different unit** (a Two-Rock's settings on the Dumble model, a live rig's on a
   studio take) are `unverified`, never `sourced`.
+- **A voicing nobody cited** (which reverb type of a multi-mode pedal, which channel of an amp) is
+  `unverified`: name the unit's default/most common mode, say so, and never let a spec sheet stand
+  in for the recording.
 - **The tone is blocks, models, knobs, on/off, BPM.** Preset volume, pan, chain order, globals,
   footswitches: not touched. The user configures them afterwards with the `mk300` skill.
 - **One tone per run. Never overwrite a named preset without the user's word. `mk300 read N` is
@@ -95,6 +98,7 @@ cited gear; give me an isolated-guitar WAV and I'll tune it, or tell me what's o
 | "The gate needs a source, so I'll put a plausible URL" | You just lied to the tool that exists to stop you. Empty list is allowed for the gate only. |
 | "No cab was named, I'll pick the classic one" | Unsourced stand-in. Find the recording's cab/speaker, or the amp's own combo, and resolve that. |
 | "All knobs are guesses but the user wants something" | Ship defaults marked `unverified` and say so; do not dress guesses as settings. |
+| "The product page lists spring/plate/hall, so I'll name spring" | A product page documents what the unit *can* do, not what the record used. Name the unit, let `resolve` fail, then ship the unit's default voicing marked `unverified` and say which source names only the unit. |
 | "Two pages disagree, I'll average them" | Two contradictory pages are zero sources. Find a third or ship the element `unverified` with both named. |
 | "A quick plate reverb makes it sound finished" | Uncited block. Sounding finished is not a source. |
 | "The user said qualquer coisa serve, so defaults everywhere is fine" | Defaults are fine; *invented* numbers presented as settings are not. Say which is which. |
