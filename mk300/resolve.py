@@ -69,6 +69,10 @@ def resolve(block: str, query: str) -> list[tuple[dict, float]]:
             elif any(_matches(w, ntoks) for w in _wanted(t)):
                 total += 1.0
         if total:
-            scored.append((m, round(min(1.0, total / max(1, len(q))), 2)))
+            score = total / max(1, len(q))
+            bare = name.replace("_", " ").replace("-", " ").strip()
+            if any(bare == w or bare == t for t in q for w in _wanted(t) | {t}):
+                score += 0.25          # the whole name IS the queried thing ('Boost' for a booster) beats variants ('A Boost')
+            scored.append((m, round(min(1.0, score), 2)))
     scored.sort(key=lambda x: (-x[1], x[0]["index"]))
     return scored
