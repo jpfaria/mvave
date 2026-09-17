@@ -1,7 +1,7 @@
 {
   "name": "mvave",
   "description": "Control M-VAVE pedals (M-EFCS protocol; MK-300 mapped) over USB from Claude — presets, models, knobs, block on/off, globals, re-amp over USB audio — and build a song's tone as a preset from cited gear research.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "João Paulo"
   },
