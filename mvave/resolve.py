@@ -49,6 +49,7 @@ def _wanted(token: str) -> set[str]:
 
 
 def _matches(w: str, ntoks: set[str]) -> bool:
+    w = w.replace("_", "").replace("-", "")   # 'blues_od' is compared with the joined name 'bluesod'
     return any(w == t or (len(w) >= 3 and w in t) for t in ntoks)
 
 

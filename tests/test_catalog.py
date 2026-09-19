@@ -34,3 +34,9 @@ def test_resolve():
     assert any("J800" in n for n in names)
     assert resolve("DS", "Ibanez TS808")[0][0]["name"] == "2TS8"
     assert resolve("CAB", "Vox AC30")[0][0]["name"].startswith("17VOX_AC30")
+
+
+def test_resolve_alias_with_separator():
+    # 'bluesbreaker' -> 'blues_od': an alias written with '_' must match the model name 1BLUES_OD
+    assert resolve("DS", "Bluesbreaker")[0][0]["name"] == "1BLUES_OD"
+    assert resolve("DS", "Marshall Bluesbreaker")[0][0]["name"] == "1BLUES_OD"
