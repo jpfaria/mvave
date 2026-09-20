@@ -42,7 +42,7 @@ catalog lookup by real-world gear name (`resolve`), re-amping over USB audio (`r
 
 ## Not covered
 
-IR / AMP / DS `.am3Data` uploads (the Sounds and Import pages), the Looper / Drum / global EQ
+IR / AMP / DS model uploads (`.nam` and `.am4Data`; this MK-300 is AM4 and imports NAM) (the Sounds and Import pages), the Looper / Drum / global EQ
 pages, footswitch and toe-switch assignments, the other global fields. The editor was only
 observed for the messages listed in `docs/protocol.md`; the library does not guess.
 

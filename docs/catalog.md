@@ -55,7 +55,7 @@ Noise gate / compressor block: AI Gate and AI Ms Gate = adaptive gates (Gate amo
 
 ## DS (block id 3, 40 models)
 
-Drive block: 40 neural/analog captures of overdrive, distortion and fuzz pedals. Knobs are the same for every model: Gain, Level, Bass, Middle, Treble, Reso (low resonance), Pres (presence), Bright. The number prefix is the model's 1-based position. Extra 'MW-' models (MW-808 = TS808, MW-GOLD = Klon Centaur, MW-OCD, MW-SD1, MW-DS1, MW-RAT, MW-XEP = EP Booster, MW-FACE = Fuzz Face, MW-HRZ = Horizon Precision Drive, MW-EQP = EQD Plumes, MW-MUFF = Big Muff, MW-B7000 = Darkglass B7K Ultra) are downloadable .am3Data files loaded through the editor's Sounds page, not part of this fixed list.
+Drive block: 40 neural/analog captures of overdrive, distortion and fuzz pedals. Knobs are the same for every model: Gain, Level, Bass, Middle, Treble, Reso (low resonance), Pres (presence), Bright. The number prefix is the model's 1-based position. Extra 'MW-' models (MW-808 = TS808, MW-GOLD = Klon Centaur, MW-OCD, MW-SD1, MW-DS1, MW-RAT, MW-XEP = EP Booster, MW-FACE = Fuzz Face, MW-HRZ = Horizon Precision Drive, MW-EQP = EQD Plumes, MW-MUFF = Big Muff, MW-B7000 = Darkglass B7K Ultra) are downloadable model files (.am4Data on an AM4 unit) loaded through the editor's Sounds page, not part of this fixed list.
 
 Name fragments and what they point at (readings of the abbreviations, `?` = unsure):
 

@@ -1,7 +1,7 @@
 ---
 tags: [mvave, learnings]
 created: 2026-09-18
-updated: 2026-09-18
+updated: 2026-09-20
 source: claude-code-sessions
 ---
 
@@ -38,3 +38,18 @@ source: claude-code-sessions
   `~/Documents/Obsidian/music-setup/`).
 - **Applies to:** `mvave/reamp.py`, `mvave/usb_audio.py`, `mvave/doctor.py`, and any future
   command that needs USB Audio in a non-ON mode.
+
+## 2026-09-20 — The MK-300 is AM4 and imports NAM (not AM3)
+
+- **Fact (João):** his MK-300 is the AM4 generation and now accepts `.nam` directly.
+- **Evidence in the editor (M-EFCS, `App.framework` strings, read-only):** `.am4Data`,
+  `convertNamToAm4Data`, `calc_bias_gru_am4` (AM4 looks like a GRU), `mk300_am4_preset.bin` /
+  `mk300_am4_ampCab.bin` next to the `am3` ones; NAM conversion UI strings (`namConvertingHashing`,
+  `…Uploading`, `…Querying`) and the endpoints `community.m-vave.com/bbs/api/namhash` and
+  `/uploadnam`; a "Switch to TONE3000" community link.
+- **Observed on the pedal:** preset `[105] nam` uses AMP index 119 (`120GKL800_BS`). Inference, not
+  confirmed with João: his NAM import sits in that factory bass slot, i.e. imports replace catalog
+  slots and `mvave` keeps printing the catalog name.
+- **Not measured yet:** the SysEx the editor sends on import, whether conversion is local or on
+  M-VAVE's server, which AMP/DS slots are writable. João does not want `mvave` calling M-VAVE's API.
+- **Applies to:** any upload/import feature; `docs/protocol.md` "not covered".

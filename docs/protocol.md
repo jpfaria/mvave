@@ -99,7 +99,7 @@ the model's defaults (recorded in `mvave/devices/mk300_catalog.json`).
 Rename / chain reorder as the editor does them (`mvave` writes those bytes one by one with
 `write_u8`, verified by read-back), the other global fields (Sync, Pedal State, toe switches, BT/USB
 volumes — the editor's clicks were not observed writing them), the EQ / Looper / Drum pages, IR / AMP /
-DS `.am3Data` uploads (Sounds and Import pages), footswitch assignments (bytes 0x14A… of the preset),
+DS model uploads (`.nam` and `.am4Data`; this MK-300 is AM4 and imports NAM) (Sounds and Import pages), footswitch assignments (bytes 0x14A… of the preset),
 what the pedal broadcasts when a footswitch changes the preset (nothing beyond byte 0 of the polled
 global block changing; `mvave listen` polls it).
 
