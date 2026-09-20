@@ -57,6 +57,12 @@ source: claude-code-sessions
   João does not want `mvave` calling M-VAVE's API.
 - **Observed on the pedal:** preset `[105] nam` uses AMP index 119 (`120GKL800_BS`) — inference, not
   confirmed: his NAM import sits in that slot and `mvave` prints the catalog name.
+- **Editor support for A2 (2026-09-20):** the App Store listing (id 6470352068) says 3.9.0721,
+  2026-09-11, "Added A2 Lite support" — that is the iOS build. The **macOS** build on João's Mac App
+  Store is still 3.7.141x (July), with no A2 strings in it. M-VAVE ships no Mac build outside the
+  App Store: the site's "PC" download is a Windows-only zip (`m_efcs.exe`), plus the Android APK.
+  So today a `.nam` goes into the pedal from the phone app or Windows, not from the Mac editor —
+  and the Mac editor cannot be spied on for the upload SysEx until it updates.
 - **Not measured yet:** the SysEx the editor sends when it loads a `.nam`, and which AMP/DS slots
   are writable. No public doc covers it (M-VAVE only publishes a video: "NAM A2 introduction,
   loading, and listening").
