@@ -107,5 +107,6 @@ playing; exit 1 prints what's wrong and the exact command to fix it.
 Importing IR/AMP/DS models (Sounds and Import pages), the Looper/Drum/global EQ pages,
 footswitch and toe-switch assignments, firmware updates.
 
-**The MK-300 is AM4 and imports `.nam` (NAM) files** as AMP/DS models, besides `.am4Data`.
-`.am3Data` is the older generation's format — never tell the user the pedal "only takes AM3".
+**Since firmware V73 the MK-300 runs NAM A2 natively**: a TONE3000 A2 `.nam` goes in as is and the
+pedal runs its A2-Lite width — no conversion to AM3/AM4, no M-VAVE cloud. `.am4Data` is M-VAVE's
+own format; `.am3Data` is the older one. Never tell the user the pedal "only takes AM3".
