@@ -71,9 +71,19 @@ mvave global-set rch Dry                       # ONE write, then read again
 ```
 
 **Re-amp a DI through the current preset**: `mvave reamp di.wav wet.wav` (sets USB Audio =
-RESAMPLE for the run and restores it; needs `pip install "mvave[reamp]"`).
+RESAMPLE for the run and restores it; needs `pip install "mvave[reamp]"`). USB Audio is
+**borrowed state**: RESAMPLE makes the pedal ignore the guitar input and process USB playback
+instead, so it must never be left set after the run — `reamp` guarantees the restore (normal
+exit, exception, or Ctrl-C/kill) via `mvave.usb_audio.borrowed_usb_audio`, the only code path
+allowed to write that field. If a run is interrupted in a way that skips even that (killed
+process), or you're not sure: `mvave doctor` reads the globals and reports it (exit 1) with the
+fix (`mvave global-set usb-audio 0`).
 
 **Follow the footswitches**: `mvave listen 120` prints the preset index whenever it changes.
+
+**Sanity-check the pedal before playing**: `mvave doctor` — exit 0 and "ok" means nothing is
+left in a state (like USB Audio != ON) that would make the pedal silent for normal guitar
+playing; exit 1 prints what's wrong and the exact command to fix it.
 
 ## Hard rules
 
@@ -87,6 +97,10 @@ RESAMPLE for the run and restores it; needs `pip install "mvave[reamp]"`).
   checksum, a wrong frame is silently dropped and a wrong offset is a wrong preset.
 - A timeout on any command means the pedal did not answer: repeat `mvave show`; if it still
   times out, tell the user to power-cycle the pedal and re-check what was written.
+- If you're adding new code that needs USB Audio in RESAMPLE (or any mode other than ON) even
+  briefly, do it through `mvave.usb_audio.borrowed_usb_audio(device)` — never `device.set_u8`
+  the field directly. That's what makes the restore unconditional (success, exception, signal);
+  a direct write does not.
 
 ## Not possible over USB (use the editor)
 

@@ -227,6 +227,18 @@ def cmd_resolve(a):
         print(f"{score:4.2f}  {m['index']:3d}  {m['name']}")
 
 
+def cmd_doctor(a):
+    from .doctor import diagnose
+    with _dev(a) as d:
+        g = d.read_global()
+    problems = diagnose(PROF, g)
+    if problems:
+        for msg in problems:
+            print(msg, file=sys.stderr)
+        sys.exit(1)
+    print("ok: pedal is set up for normal guitar playing")
+
+
 def cmd_listen(a):
     with _dev(a) as d:
         last = None
@@ -280,6 +292,7 @@ def main(argv=None):
     s = sub.add_parser("resolve", help="which model is based on a real-world unit: resolve AMP 'Marshall JCM800'")
     s.add_argument("block"); s.add_argument("query"); s.add_argument("-n", type=int, default=5); s.set_defaults(fn=cmd_resolve)
     s = sub.add_parser("listen", help="print the preset index whenever it changes (footswitches)"); s.add_argument("seconds", type=int, nargs="?", default=60); s.set_defaults(fn=cmd_listen)
+    s = sub.add_parser("doctor", help="check the globals for anything that would leave the pedal silent for normal playing (exit 1 if dirty)"); s.set_defaults(fn=cmd_doctor)
 
     a = ap.parse_args(argv)
     _use_device(a.device)

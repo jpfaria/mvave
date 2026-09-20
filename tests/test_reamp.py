@@ -35,3 +35,38 @@ def test_reamp_no_signal(tmp_path):
     sf.write(di, np.zeros(4410, "float32"), 44100)
     with pytest.raises(R.NoSignal):
         R.reamp(di, tmp_path / "wet.wav", tail_s=0, playrec=lambda play, name: np.zeros_like(play))
+
+
+def test_reamp_restores_on_exception(tmp_path):
+    """The pedal must come back out of RESAMPLE even when playrec blows up mid-run."""
+    di = tmp_path / "di.wav"
+    sf.write(di, (0.1 * np.sin(np.linspace(0, 200, 44100))).astype("float32"), 44100)
+    dev = FakeDev()
+
+    def playrec(play, name):
+        raise RuntimeError("audio device disappeared")
+
+    with pytest.raises(RuntimeError):
+        R.reamp(di, tmp_path / "wet.wav", tail_s=1.0, device=dev, playrec=playrec)
+    assert dev.g[0x3D] == 0
+    assert dev.writes == [(0x3D, 2, 2), (0x3D, 0, 2)]
+
+
+def test_reamp_goes_through_borrowed_usb_audio(tmp_path, monkeypatch):
+    """Regression guard: reamp() must not set/restore usb-audio itself — it has to route through
+    the single choke point in mvave.usb_audio, which is what actually guarantees the restore
+    (see tests/test_usb_audio.py). If someone reintroduces a direct device.set_u8() call in
+    reamp() to "simplify" it, this test catches that the shared helper stopped being used."""
+    di = tmp_path / "di.wav"
+    sf.write(di, (0.1 * np.sin(np.linspace(0, 200, 44100))).astype("float32"), 44100)
+    dev = FakeDev()
+    calls = []
+    real = R.borrowed_usb_audio
+
+    def spy(device, mode=None):
+        calls.append(device)
+        return real(device, mode)
+
+    monkeypatch.setattr(R, "borrowed_usb_audio", spy)
+    R.reamp(di, tmp_path / "wet.wav", tail_s=1.0, device=dev, playrec=lambda play, name: play * 0.5)
+    assert calls == [dev]

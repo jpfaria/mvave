@@ -4,13 +4,13 @@
 
 ```
 usage: mvave [-h] [--device DEVICE] [--port PORT]
-             {show,load,param,model,enable,volume,bpm,pan,presets,read,save,copy,rename,chain,reamp,global,global-set,models,params,bank,resolve,listen}
+             {show,load,param,model,enable,volume,bpm,pan,presets,read,save,copy,rename,chain,reamp,global,global-set,models,params,bank,resolve,listen,doctor}
              ...
 
 M-VAVE pedals over USB without the M-EFCS editor
 
 positional arguments:
-  {show,load,param,model,enable,volume,bpm,pan,presets,read,save,copy,rename,chain,reamp,global,global-set,models,params,bank,resolve,listen}
+  {show,load,param,model,enable,volume,bpm,pan,presets,read,save,copy,rename,chain,reamp,global,global-set,models,params,bank,resolve,listen,doctor}
     show                the edit buffer: name, chain, models, knobs
     load                load preset N (1..160) and show it
     param               set a knob of a block: param AMP Gain 60 (knob by name
@@ -43,6 +43,8 @@ positional arguments:
                         'Marshall JCM800'
     listen              print the preset index whenever it changes
                         (footswitches)
+    doctor              check the globals for anything that would leave the
+                        pedal silent for normal playing (exit 1 if dirty)
 
 options:
   -h, --help            show this help message and exit

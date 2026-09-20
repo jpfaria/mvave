@@ -14,7 +14,7 @@ from pathlib import Path
 import numpy as np
 import soundfile as sf
 
-from . import protocol as p
+from .usb_audio import borrowed_usb_audio
 
 DEVICE = "USB-Audio"
 DEVICE_RATE = 44100
@@ -62,27 +62,20 @@ def _default_playrec(play: np.ndarray, device_name: str) -> np.ndarray:
 
 def reamp(di, out, *, tail_s: float = 2.0, mono: bool = False, device=None,
           device_name: str | None = None, playrec=None) -> ReampResult:
-    """`device` is an mvave.device.MVave (sets its profile's USB Audio field to RESAMPLE and restores
-    it); None = leave the global alone. `playrec(play, device_name) -> recorded` is injectable."""
+    """`device` is an mvave.device.MVave (its usb-audio field is borrowed for the run via
+    mvave.usb_audio.borrowed_usb_audio, which guarantees it is restored — see that module for
+    why this must never be done any other way); None = leave the global alone. `playrec(play,
+    device_name) -> recorded` is injectable."""
     playrec = playrec or _default_playrec
     prof = getattr(device, "profile", None)
-    field = getattr(prof, "usb_audio_field", 0x3D)
-    resample = getattr(prof, "usb_audio_resample", 2)
     device_name = device_name or getattr(prof, "audio_device", DEVICE)
-    signal = _load_mono_44k(Path(di))
-    total = len(signal) + int(tail_s * DEVICE_RATE)
+    di_signal = _load_mono_44k(Path(di))
+    total = len(di_signal) + int(tail_s * DEVICE_RATE)
     play = np.zeros((total, CHANNELS), np.float32)
-    play[: len(signal), 0] = signal
-    play[: len(signal), 1] = signal
-    previous = None
-    if device is not None:
-        previous = device.read_global()[field]
-        device.set_u8(field, resample, p.SPACE_STATUS)
-    try:
+    play[: len(di_signal), 0] = di_signal
+    play[: len(di_signal), 1] = di_signal
+    with borrowed_usb_audio(device):
         rec = playrec(play, device_name)[:total]
-    finally:
-        if device is not None and previous is not None:
-            device.set_u8(field, previous, p.SPACE_STATUS)
     rms = float(np.sqrt(np.mean(rec ** 2)) + 1e-12)
     rms_db = 20 * float(np.log10(rms))
     if rms_db < SILENCE_DBFS:

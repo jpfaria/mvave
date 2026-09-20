@@ -1,0 +1,40 @@
+---
+tags: [mvave, learnings]
+created: 2026-09-18
+updated: 2026-09-18
+source: claude-code-sessions
+---
+
+# mvave — Learnings
+
+## 2026-09-18 — One direct-reference URL per package across sibling repos
+
+- **Gotcha / invariant:** `tone-analyzer` is a `git+https://…` direct reference. If two packages in the same environment (e.g. `mvave` and `tone-builder`) point at it with different URLs (one pinned `@vX`, one unpinned), pip refuses to resolve. Keep the exact same URL string in every sibling repo (`53df8dc`).
+- **Why it matters:** installing the whole toolchain fails, not just this package.
+- **Applies to:** `pyproject.toml` `dependencies`, and every other repo that depends on `tone-analyzer`.
+
+## 2026-09-20 — USB Audio is borrowed state; restore it or the rig goes silent
+
+- **Incident:** 19–20/09, `mvave reamp` (called from tone-builder) left the MK-300's global
+  `usb-audio` at `2 (RESAMPLE)`. In that mode the pedal ignores the guitar input and processes
+  USB playback instead, so the rig was silent and João lost an hour debugging it before
+  `mvave global` surfaced `usb-audio 0x3d = 2 (RESAMPLE)`. Same class of bug hit the Ampero in
+  another repo.
+- **Gotcha / invariant:** any code path that switches `usb-audio` (re-amp today, maybe more
+  later) borrows it and must restore it — on normal completion, on exception, and on
+  SIGINT/SIGTERM before the process dies. The guarantee lives in code, not in a caller
+  remembering to clean up: `mvave.usb_audio.borrowed_usb_audio(device)` is the single choke
+  point allowed to write that field (`mvave/usb_audio.py`); `reamp()` uses it and does not touch
+  `device.set_u8` for that field itself (see `tests/test_reamp.py::test_reamp_goes_through_borrowed_usb_audio`,
+  a regression guard that fails if a future edit bypasses the helper).
+  - If the restore write itself fails (e.g. MIDI timeout), it does not raise — it prints a loud
+    warning to stderr with the exact fix (`mvave global-set usb-audio 0`), so it never masks
+    whatever the caller was doing.
+  - `mvave doctor` (`mvave/doctor.py`, pure `diagnose(profile, globals_bytes)`) is the
+    independent sanity check: reads the globals and reports `usb-audio != ON` (or any future
+    similar field) with the fix, exit 1 when dirty.
+- **Why it matters:** a pedal silent to the guitar input looks like a hardware or OBS problem,
+  not a leftover global field — costs real debugging time (measure before hypothesizing, see
+  `~/Documents/Obsidian/music-setup/`).
+- **Applies to:** `mvave/reamp.py`, `mvave/usb_audio.py`, `mvave/doctor.py`, and any future
+  command that needs USB Audio in a non-ON mode.
