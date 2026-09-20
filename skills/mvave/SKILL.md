@@ -104,5 +104,8 @@ playing; exit 1 prints what's wrong and the exact command to fix it.
 
 ## Not possible over USB (use the editor)
 
-Importing IR/AMP/DS `.am3Data` files (Sounds and Import pages), the Looper/Drum/global EQ pages,
+Importing IR/AMP/DS models (Sounds and Import pages), the Looper/Drum/global EQ pages,
 footswitch and toe-switch assignments, firmware updates.
+
+**The MK-300 is AM4 and imports `.nam` (NAM) files** as AMP/DS models, besides `.am4Data`.
+`.am3Data` is the older generation's format — never tell the user the pedal "only takes AM3".
