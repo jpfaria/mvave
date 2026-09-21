@@ -85,3 +85,14 @@ python3 tools/build_reference.py           # regenerate skills/mvave/reference.m
 The protocol (`mvave/protocol.py`) is the editor's and does not change. A new pedal is a new module
 in `mvave/devices/` (preset struct offsets, global fields, a `*_catalog.json`) plus its entry in
 `PROFILES`; capture the editor's traffic for that pedal the way `docs/protocol.md` describes.
+
+
+## O SMC-Mixer não está aqui
+
+O **SMC-Mixer** é uma superfície de controle, não um pedal: ele não fala M-EFCS,
+fala **Mackie Control**, e o que ele controla não é um aparelho da M-VAVE — é o
+que o usuário mandar (uma interface, o volume do sistema, um player).
+
+Por isso ele mora em **[jpfaria/mackie-control](https://github.com/jpfaria/mackie-control)**,
+junto com o protocolo e a ponte. Este repo continua sendo o dos pedais e do
+M-EFCS.
