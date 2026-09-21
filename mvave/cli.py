@@ -257,6 +257,11 @@ def cmd_listen(a):
                 print(f"preset [{last + 1:03d}]")
 
 
+def cmd_bridge(a):
+    from .bridge.run import run
+    run(a.profile, port=a.port)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="mvave", description="M-VAVE pedals over USB without the M-EFCS editor")
     ap.add_argument("--device", default=devices.DEFAULT, help=f"pedal profile: {', '.join(devices.PROFILES)} (default {devices.DEFAULT})")
@@ -292,6 +297,9 @@ def main(argv=None):
     s = sub.add_parser("resolve", help="which model is based on a real-world unit: resolve AMP 'Marshall JCM800'")
     s.add_argument("block"); s.add_argument("query"); s.add_argument("-n", type=int, default=5); s.set_defaults(fn=cmd_resolve)
     s = sub.add_parser("listen", help="print the preset index whenever it changes (footswitches)"); s.add_argument("seconds", type=int, nargs="?", default=60); s.set_defaults(fn=cmd_listen)
+    s = sub.add_parser("bridge", help="run a control surface (SMC-Mixer) against a rig profile: bridge PERFIL.yaml")
+    s.add_argument("profile"); s.add_argument("--port", help="porta MIDI exata, se o palpite do perfil nao servir")
+    s.set_defaults(fn=cmd_bridge)
     s = sub.add_parser("doctor", help="check the globals for anything that would leave the pedal silent for normal playing (exit 1 if dirty)"); s.set_defaults(fn=cmd_doctor)
 
     a = ap.parse_args(argv)

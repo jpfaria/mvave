@@ -39,6 +39,19 @@ source: claude-code-sessions
 - **Applies to:** `mvave/reamp.py`, `mvave/usb_audio.py`, `mvave/doctor.py`, and any future
   command that needs USB Audio in a non-ON mode.
 
+## 2026-09-20 — A NAM capture is the amp alone: CAB off is the fizz
+
+- **Symptom:** "coloquei um NAM na mk300 e ta fazendo um barulho horrivel". Measured on preset
+  `[105] nam`: `CAB` was **off**. A NAM capture models the amp, not the cabinet, so a raw amp into
+  an FRFR speaker is exactly that fizz. `usb-audio = ON` and `rch = Nor` were ruled out first.
+- **Gotcha / invariant:** before blaming the capture or the routing, read the CAB block. CAB off is
+  only correct when the chain feeds a real power amp + cab (the SYN-5050 path), never FRFR.
+- **Do not read the CAB catalog names as instrument hints:** `1AC-SeVin` is **Vox AC**
+  (Celestion/Alnico), a guitar cab — not an acoustic one. CAB indices 1–64 are all guitar cabs
+  (`docs/catalog.md`). Claude called it an acoustic cab and swapped João's choice on that basis.
+- **Applies to:** any "horrible noise" report on the MK-300, and any code or advice that maps a
+  catalog name to a use case.
+
 ## 2026-09-20 — Firmware V73: native NAM A2 (A2-Lite), no conversion
 
 - **Official release note** (`MK300.txt` on m-vave.com/appdownload), V73, 2026-09-07: "Added Native
