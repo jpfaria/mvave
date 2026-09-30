@@ -53,7 +53,7 @@ def show_preset(ps, index: int | None = None) -> str:
         try:
             md = cat.model(bname, m)
             knobs = md["knobs"] or []
-            mname = md["name"]
+            mname = cat.label(bname, m)
         except IndexError:
             knobs, mname = [], f"model {m}?"
         vals = ps.knobs(b)
@@ -91,7 +91,7 @@ def cmd_model(a):
         vals = d.read(pr.knob_offset(b, 0), pr.KNOB_BYTES)
         knobs = m["knobs"] or []
         got = [int.from_bytes(vals[i:i + 2], "little", signed=True) for i in range(0, len(vals), 2)]
-        print(f"{a.block} = {m['index']} {m['name']}: " + "  ".join(f"{k}={got[i]}" for i, k in enumerate(knobs)))
+        print(f"{a.block} = {m['index']} {cat.label(a.block, m['index'])}: " + "  ".join(f"{k}={got[i]}" for i, k in enumerate(knobs)))
 
 
 def cmd_enable(a):
@@ -202,7 +202,7 @@ def cmd_global_set(a):
 def cmd_models(a):
     for m in cat.models(a.block):
         knobs = ", ".join(m["knobs"] or [])
-        print(f"{m['index']:3d}  {m['name']:<20} {knobs}")
+        print(f"{m['index']:3d}  {cat.label(a.block, m['index']):<20} {knobs}")
 
 
 def cmd_params(a):
@@ -257,6 +257,40 @@ def cmd_listen(a):
                 print(f"preset [{last + 1:03d}]")
 
 
+def cmd_upload(a):
+    """NAM A2-Lite -> AMP slot, IR -> CAB slot, the way M-EFCS 3.9.2317 sends it (issue #1)."""
+    import gzip
+    import json
+    from pathlib import Path
+    from . import upload as up
+
+    if not a.audition and (a.slot is None or not a.name):
+        sys.exit("give --slot and --name, or --audition to only play it")
+    slot = None if a.audition else a.slot
+    try:
+        if a.kind == "nam":
+            raw = Path(a.file).read_bytes()
+            model = json.loads(gzip.decompress(raw) if raw[:2] == b"\x1f\x8b" else raw)
+            stem = Path(a.file).name.split(".")[0][: up.NAME_LEN - 1]
+            frames = up.nam_frames(model, slot, a.name, audition_name=stem)
+            target = f"AMP {slot}" if slot else "audition"
+        else:
+            w = up.read_wav(a.file)
+            frames = up.cab_frames(w.samples, w.rate, slot, a.name or "", a.level)
+            target = f"CAB {slot}" if slot else "audition"
+        if a.name:
+            up.name_field(a.name)
+    except (ValueError, up.UnsupportedModel) as e:
+        sys.exit(str(e))
+    if a.dry_run:
+        for f in frames:
+            print(f.hex(" "))
+        return
+    with _dev(a) as d:
+        up.send(d, frames, progress=lambda i, n: print(f"\r{i}/{n} frames acked", end="", flush=True))
+    print(f"\n{a.kind} -> {target}" + (f" as {a.name!r}" if slot else ""))
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="mvave", description="M-VAVE pedals over USB without the M-EFCS editor")
     ap.add_argument("--device", default=devices.DEFAULT, help=f"pedal profile: {', '.join(devices.PROFILES)} (default {devices.DEFAULT})")
@@ -292,6 +326,13 @@ def main(argv=None):
     s = sub.add_parser("resolve", help="which model is based on a real-world unit: resolve AMP 'Marshall JCM800'")
     s.add_argument("block"); s.add_argument("query"); s.add_argument("-n", type=int, default=5); s.set_defaults(fn=cmd_resolve)
     s = sub.add_parser("listen", help="print the preset index whenever it changes (footswitches)"); s.add_argument("seconds", type=int, nargs="?", default=60); s.set_defaults(fn=cmd_listen)
+    s = sub.add_parser("upload", help="import a NAM A2 model (AMP slot 1-120) or an IR (CAB slot 1-100): upload nam F.nam --slot 119 --name BJA_high_4")
+    s.add_argument("kind", choices=["nam", "ir"]); s.add_argument("file")
+    s.add_argument("--slot", type=int, help="AMP 1-120 (nam) or CAB 1-100 (ir); overwrites the model there")
+    s.add_argument("--name", help="slot name, up to 13 ASCII characters")
+    s.add_argument("--audition", action="store_true", help="only play it (M-EFCS 'Audition'), write nothing")
+    s.add_argument("--level", type=int, default=50, help="ir only: M-EFCS 'CAB Level' 0-100 (default 50)")
+    s.add_argument("--dry-run", action="store_true", help="print the frames instead of sending"); s.set_defaults(fn=cmd_upload)
     s = sub.add_parser("doctor", help="check the globals for anything that would leave the pedal silent for normal playing (exit 1 if dirty)"); s.set_defaults(fn=cmd_doctor)
 
     a = ap.parse_args(argv)

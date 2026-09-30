@@ -40,3 +40,16 @@ def test_resolve_alias_with_separator():
     # 'bluesbreaker' -> 'blues_od': an alias written with '_' must match the model name 1BLUES_OD
     assert resolve("DS", "Bluesbreaker")[0][0]["name"] == "1BLUES_OD"
     assert resolve("DS", "Marshall Bluesbreaker")[0][0]["name"] == "1BLUES_OD"
+
+
+def test_user_imports_29_09():
+    """Since V73 AMP 1-120 / CAB 1-100 take user NAM A2 / IR imports (issue #1)."""
+    assert cat.user_import("AMP", 118)["name"] == "BJA_high_4" and cat.user_import("AMP", 118)["kind"] == "NAM"
+    assert cat.user_import("AMP", 119)["name"] == "marshall_supe"
+    assert cat.user_import("CAB", 99)["name"] == "V30_ev_mix_b" and cat.user_import("CAB", 99)["kind"] == "IR"
+    assert cat.user_import("AMP", 0) is None
+    assert cat.label("AMP", 118).startswith("BJA_high_4")
+    assert cat.label("AMP", 52) == "53J900_CH1"
+    assert cat.find_model("AMP", "BJA_high_4")["index"] == 118
+    assert cat.find_model("CAB", "V30_ev_mix_b")["index"] == 99
+    assert cat.importable("AMP") == (1, 120) and cat.importable("CAB") == (1, 100) and cat.importable("DS") is None

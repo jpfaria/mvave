@@ -104,8 +104,21 @@ playing; exit 1 prints what's wrong and the exact command to fix it.
 
 ## Not possible over USB (use the editor)
 
-Importing IR/AMP/DS models (Sounds and Import pages), the Looper/Drum/global EQ pages,
-footswitch and toe-switch assignments, firmware updates.
+The Looper/Drum/global EQ pages, footswitch and toe-switch assignments, firmware updates,
+DS/`.am4Data` model files (Sounds page).
+
+## NAM and IR imports (`mvave upload`)
+
+Since firmware V73 the pedal loads user **NAM A2** models into AMP slots 1-120 and user **IRs**
+into CAB slots 1-100, overwriting the factory model there (`docs/catalog.md` "User imports"
+lists what is in the pedal now).
+- `mvave upload nam FILE.nam --slot N --name NAME` / `mvave upload ir FILE.wav --slot N --name NAME`;
+  `--audition` only plays it, `--dry-run` prints the frames. Names: up to 13 ASCII characters.
+- `upload ir --level N` sets M-EFCS's "CAB Level" (0-100, default 50). A 48 kHz IR is resampled
+  to 44.1 kHz bit-exactly like M-EFCS; other rates work but were not compared with the app.
+- Only A2 `.nam` files with the standard A2-Lite submodel are accepted; anything else is refused.
+- After an import, add it to `user_imports` in `mvave/devices/mk300_catalog.json` and rerun
+  `tools/build_reference.py`: slot names can not be read back over USB yet.
 
 **Since firmware V73 the MK-300 runs NAM A2 natively**: a TONE3000 A2 `.nam` goes in as is and the
 pedal runs its A2-Lite width — no conversion to AM3/AM4, no M-VAVE cloud. `.am4Data` is M-VAVE's

@@ -4842,5 +4842,49 @@
    ]
   }
  ],
- "note": "Model lists read from the M-EFCS 3.7.1413 dropdowns (index = position, DS/AMP/CAB names carry their 1-based number); knob names from the editor's panel; defaults read from the pedal (firmware V73) right after selecting the model. Speed/Time knobs are stored x10 / in ms (Speed 2.5 = 25, Time 0.5 s = 500); negative values are int16."
+ "note": "Model lists read from the M-EFCS 3.7.1413 dropdowns (index = position, DS/AMP/CAB names carry their 1-based number); knob names from the editor's panel; defaults read from the pedal (firmware V73) right after selecting the model. Speed/Time knobs are stored x10 / in ms (Speed 2.5 = 25, Time 0.5 s = 500); negative values are int16. Since firmware V73 the AMP slots 1-120 take user NAM A2 models (the pedal runs the A2-Lite submodel natively) and the CAB slots 1-100 take user IRs (2048 samples, 44.1 kHz, 24-bit); an import overwrites the factory model in that slot. `importable` gives the ranges, `user_imports` what is in the pedal now; the factory name/knobs/defaults of an overwritten slot describe the model that used to be there.",
+ "importable": {
+  "AMP": {
+   "slots": [
+    1,
+    120
+   ],
+   "kind": "NAM",
+   "format": "NAM A2 (.nam, A2-Lite submodel)"
+  },
+  "CAB": {
+   "slots": [
+    1,
+    100
+   ],
+   "kind": "IR",
+   "format": "IR .wav (M-EFCS takes 24-bit int, 48 kHz, mono; the pedal stores 2048 samples at 44.1 kHz)"
+  }
+ },
+ "user_imports": [
+  {
+   "block": "AMP",
+   "slot": 119,
+   "name": "BJA_high_4",
+   "kind": "NAM",
+   "source": "OpenRig-plugins nam/marshall_1959bja_a2/captures/high_4_a2.nam",
+   "date": "2026-09-29"
+  },
+  {
+   "block": "AMP",
+   "slot": 120,
+   "name": "marshall_supe",
+   "kind": "NAM",
+   "source": "not recorded (name truncated to 13 characters)",
+   "date": "2026-09-29"
+  },
+  {
+   "block": "CAB",
+   "slot": 100,
+   "name": "V30_ev_mix_b",
+   "kind": "IR",
+   "source": "V30_ev_mix_b.wav",
+   "date": "2026-09-29"
+  }
+ ]
 }

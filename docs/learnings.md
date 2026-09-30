@@ -117,3 +117,15 @@ source: claude-code-sessions
   transposed to column-major (`[k][in][out]`) + **73 extra floats**: `825.08, 0, 0, 0` and 23×3 values
   (one triple per layer, growing to ~50 — looks like a per-layer state computed by the editor).
   The editor code is Dart AOT: `package:m_efcs/utils/nam_a2_lite_exporter.dart` (`exportNamA2LiteFile`).
+
+## 2026-09-30 — Upload blob fully derived from M-EFCS's code (issue #1)
+
+Decompiling M-EFCS for Android (blutter, Dart 3.11.4) closed every open point of 2026-09-29:
+- NAM header u32 `64 96 50 28` and the 9 floats are hard-coded in `NamA2LiteExporter._writeHeader`.
+- The "825.08" float is the ASCII marker `BEND`; the rest of the trailer is the network's
+  zero-input steady state (`_simulateSteadyState`). Plain float32 or float64 math misses by ~60
+  values: it only matches bit for bit with M-EFCS's mix (float32 per tap/output, double inside).
+- CAB bytes `01 32` = a 1 and the "CAB Level" slider (default 50).
+- The IR resampler is reproducible bit for bit (Kaiser windowed sinc), so the CAB upload is
+  byte-exact too, not "close".
+The layout is in `docs/protocol.md` "Uploads"; the code is `mvave/upload.py`.

@@ -24,6 +24,9 @@ CLS_ACK = 0x01
 CMD_READ = 0x41
 CMD_WRITE_U8 = 0x49  # 1-byte fields: models, on/off, load preset
 CMD_WRITE_U16 = 0x51 # 2-byte fields: knobs, preset vol / pan / bpm
+# Upload frames (NAM / IR import, M-EFCS 3.9.2317, 29/09) carry 0x40 in the 4th CMD digit,
+# and their checksum is exactly one below checksum(): see docs/protocol.md "Uploads".
+FLAG_UPLOAD = 0x40 << 21
 
 SPACE_BANK = 0x0     # preset flash bank: 160 x 448 bytes, addressed by byte offset (slot * 448)
 SPACE_PRESET = 0x1   # the edit buffer (448-byte preset struct)
@@ -75,9 +78,11 @@ def _from_u32_7(b: bytes) -> int:
     return b[0] | b[1] << 7 | b[2] << 14 | b[3] << 21
 
 
-def checksum(field: int, length: int, space: int, payload: bytes) -> int:
+def checksum(field: int, length: int, space: int, payload: bytes, cmd: int = 0) -> int:
     sub8 = (length << 8) | (space << 4)
     total = sum(payload) + sum(field.to_bytes(4, "little")) + sum(sub8.to_bytes(4, "little"))
+    if cmd & FLAG_UPLOAD:
+        total += 1
     return (0xFB - total) & 0xFF
 
 
@@ -98,7 +103,7 @@ class Frame:
 def build(cls: int, cmd: int, field: int, length: int, space: int, payload: bytes = b"") -> bytes:
     """Encode a frame.  `length` is the size of the addressed object (for a read it is
     how many bytes to read; for a write it equals len(payload))."""
-    ck = checksum(field, length, space, payload)
+    ck = checksum(field, length, space, payload, cmd)
     hdr = bytes([cls]) + _u32_7(cmd) + b"\x02" + _u32_7(field) + _u32_7((length << 4) | space)
     return b"\xf0" + MANUFACTURER + hdr + pack7(payload + bytes([ck])) + b"\xf7"
 
@@ -117,9 +122,10 @@ def parse(frame: bytes, verify: bool = True) -> Frame:
         raise ValueError("no checksum")
     payload, ck = dec[:-1], dec[-1]
     field = _from_u32_7(hdr[6:10])
-    if verify and ck != checksum(field, length, space, payload):
-        raise ValueError(f"bad checksum {ck:02x} != {checksum(field, length, space, payload):02x}")
-    return Frame(hdr[0], _from_u32_7(hdr[1:5]), field, length, space, payload)
+    cmd = _from_u32_7(hdr[1:5])
+    if verify and ck != checksum(field, length, space, payload, cmd):
+        raise ValueError(f"bad checksum {ck:02x} != {checksum(field, length, space, payload, cmd):02x}")
+    return Frame(hdr[0], cmd, field, length, space, payload)
 
 
 def is_ack(frame: bytes) -> bool:

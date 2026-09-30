@@ -94,12 +94,34 @@ EQ bands and gate thresholds in dB (negative = two's complement, `Thd` −60 = `
 `DS`, `AMP` and `CAB` keep their knob values across a model change; the other blocks are reset to
 the model's defaults (recorded in `mvave/devices/mk300_catalog.json`).
 
+## Uploads (NAM A2 / IR, firmware V73, M-EFCS 3.9.2317)
+
+Captured in `docs/captures/upload-2026-09-29/`, rebuilt byte for byte by `mvave/upload.py`
+(`tests/test_upload.py`). Blob construction decompiled from M-EFCS for Android (Dart AOT, blutter):
+`utils/nam_a2_lite_exporter.dart`, `utils/wave_utils.dart`, `ui/modules/import_cab.dart`.
+
+- **Frames**: class 09, CMD `0x41 + 8*len` with the upload flag (bit 27, `0x40` in the 4th CMD
+  digit); the flag makes the checksum the usual one **minus 1**. Blob goes to space 0 in 1015-byte
+  chunks, field = byte offset. Every frame is acked.
+- **Audition**: `write_u8` (flagged) space 0xA field 0 = 1 (NAM) / 2 (CAB).
+- **Save**: NAM sends the whole blob again with the user's name; CAB sends only the 20-byte header
+  again. Then `write_u8` (flagged) space 0xF value 0, field = slot-1 (AMP) or 0x100 + slot-1 (CAB).
+- **NAM blob** (7836 bytes): `NAM\0`, name (14 bytes, 13 chars + NUL), bytes `64 96 50 28 00 00`,
+  9 float32 `150 -20 20 425 -15 15 1800 -10 10` (constants of `_writeHeader`), the 1871 A2-Lite
+  weights (`submodels[0]`) with every matrix written column-major per tap, the ASCII marker
+  `BEND`, 12 zero bytes, then 69 float32: the zero-input steady state (residual input of layers
+  1..22 and the summed activations feeding the head; `_simulateSteadyState`, float32 storage with
+  the exact accumulation order in `nam_steady_state`).
+- **CAB blob**: `CAB\0`, name (14 bytes, empty on audition), `01`, "CAB Level" (slider, default 50),
+  2048 int24 LE samples at 44.1 kHz. `WaveUtils.resample`: windowed sinc, Kaiser beta 8.6, ±24 taps,
+  cutoff min(1, dst/src), normalised by the sum of the weights, rounded and clamped to int24.
+
 ## Not captured
 
 Rename / chain reorder as the editor does them (`mvave` writes those bytes one by one with
 `write_u8`, verified by read-back), the other global fields (Sync, Pedal State, toe switches, BT/USB
-volumes — the editor's clicks were not observed writing them), the EQ / Looper / Drum pages, IR / AMP /
-DS model uploads (native NAM A2 `.nam` since firmware V73, and `.am4Data`) (Sounds and Import pages), footswitch assignments (bytes 0x14A… of the preset),
+volumes — the editor's clicks were not observed writing them), the EQ / Looper / Drum pages, DS
+`.am4Data` uploads (Sounds page), footswitch assignments (bytes 0x14A… of the preset),
 what the pedal broadcasts when a footswitch changes the preset (nothing beyond byte 0 of the polled
 global block changing; `mvave listen` polls it).
 

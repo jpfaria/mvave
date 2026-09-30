@@ -60,6 +60,8 @@ def resolve(cat, block: str, query: str) -> list[tuple[dict, float]]:
     q = _tokens(query)
     scored = []
     for m in cat.models(block):
+        if cat.user_import(block, m["index"]):   # slot overwritten by a user NAM/IR: the name no longer applies
+            continue
         name = re.sub(r"^\d+", "", m["name"]).lower()
         ntoks = set(_tokens(name)) | {name.replace("_", "").replace("-", "")}
         total = 0.0

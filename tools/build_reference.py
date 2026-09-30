@@ -21,8 +21,8 @@ BLOCK_NOTES = {
     "FX": "Pre-amp utility block: auto/touch wah, lo-fi bit crusher, boosts (clean Boost, A/E/B Boost = tone-stack boosts, Boost ED = gritty edge boost), compressors (Compress = pedal-style, Compress Pro / F Compress = studio ratio/knee), pitch tools (Pitch = dual pitch shifter, Octave = octaver, Ring = ring modulator, Pitch shifter = semitone shift, Whammy = expression-controlled bend).",
     "GATE": "Noise gate / compressor block: AI Gate and AI Ms Gate = adaptive gates (Gate amount + Bias), Soft/Hard Gate = threshold gates, Pro Gate = full envelope (Att/Rel/Thd/Kw/Ratio); the three compressors mirror the FX block ones.",
     "DS": "Drive block: 40 neural/analog captures of overdrive, distortion and fuzz pedals. Knobs are the same for every model: Gain, Level, Bass, Middle, Treble, Reso (low resonance), Pres (presence), Bright. The number prefix is the model's 1-based position. Extra 'MW-' models (MW-808 = TS808, MW-GOLD = Klon Centaur, MW-OCD, MW-SD1, MW-DS1, MW-RAT, MW-XEP = EP Booster, MW-FACE = Fuzz Face, MW-HRZ = Horizon Precision Drive, MW-EQP = EQD Plumes, MW-MUFF = Big Muff, MW-B7000 = Darkglass B7K Ultra) are downloadable model files (.am4Data on an AM4 unit) loaded through the editor's Sounds page, not part of this fixed list.",
-    "AMP": "Amp block: 120 captures, same 8 knobs as DS (Gain, Level, Bass, Middle, Treble, Reso, Pres, Bright). 1-100 guitar, 101-120 bass (_BS). Suffixes: _CL clean, _OD overdrive/crunch, _DS distortion, _HV/_HDS high gain, _TDS/_MT metal, _FG/_57/_196/_ECM = variants captured with different cabs/mics or era (57 = SM57?, 196x = '60s circuit?).",
-    "CAB": "Cabinet IR block (100 IRs, 1024/2048 pts): Level, Low Cut, High Cut. 1-64 guitar cabs, 65-80 combos/specials, 81-100 bass cabs. Third-party IRs can be imported through the editor.",
+    "AMP": "Amp block: 120 captures, same 8 knobs as DS (Gain, Level, Bass, Middle, Treble, Reso, Pres, Bright). 1-100 guitar, 101-120 bass (_BS). Suffixes: _CL clean, _OD overdrive/crunch, _DS distortion, _HV/_HDS high gain, _TDS/_MT metal, _FG/_57/_196/_ECM = variants captured with different cabs/mics or era (57 = SM57?, 196x = '60s circuit?). Since firmware V73 every AMP slot 1-120 can be overwritten by a user NAM A2 model (the pedal runs the A2-Lite submodel natively; `mvave upload nam`, or M-EFCS Import); the table lists the factory models, the user imports are in \"User imports\" at the top.",
+    "CAB": "Cabinet IR block (100 IRs, 1024/2048 pts): Level, Low Cut, High Cut. 1-64 guitar cabs, 65-80 combos/specials, 81-100 bass cabs. Since firmware V73 every CAB slot 1-100 can be overwritten by a user IR (`mvave upload ir`, or M-EFCS Import: 24-bit int / 48 kHz / mono .wav in, stored as 2048 samples at 44.1 kHz); the table lists the factory IRs, the user imports are in \"User imports\" at the top.",
     "EQ": "Graphic EQ block: Guitar EQ 6 (100 Hz-3.2 kHz), Bass EQ 7 (50 Hz-10 kHz), Normal EQ 10 (31 Hz-16 kHz). Bands in dB, stored as signed integers (0 = flat).",
     "MOD": "Modulation block. Tri = triangle-LFO variant, Opto = optical-style, Univibe = vibe; Autofilter = envelope/LFO filter; the 'Stereo' models are separate algorithms with their own knobs (Phaser Stereo has Stage/Regen/Lfo shape, Chorus Stereo has Mode, Vibrato Stereo has Bits).",
     "DLY": "Delay block: 13 mono algorithms (Clean = digital, Modern = digital with Phaser/Mod, Echo = tape-ish, Analog = BBD, Duck = ducking, Dtype = tape with Grit, Tremolo, Filter, Dual, Lofi, Pattern = rhythmic multi-tap, Ice = pitch-shifted, Reverse) plus PingPong Stereo and the same 13 in stereo. Time is in ms (or a note division when Sync is on).",
@@ -63,6 +63,15 @@ lines = ["# MK-300 model catalog", "",
          "knob names from the editor's panel, defaults read from the pedal on firmware V73, 2026-09-16). "
          "The model **index** is the value written to the block's model byte (`mvave model BLOCK index|name`). "
          "Knob values are int16; Speed knobs are stored x10 (2.5 -> 25), delay Time in ms, EQ bands in dB.", ""]
+imports = cat.get("user_imports", [])
+IMPORT_TABLE = ["| block | slot | name now | kind | factory model it replaced | source | date |", "|---|---|---|---|---|---|---|"]
+for u in imports:
+    fac = next(b for b in cat["blocks"] if b["name"] == u["block"])["models"][u["slot"] - 1]["name"]
+    IMPORT_TABLE.append(f"| {u['block']} | {u['slot']} | {u['name']} | {u['kind']} | {fac} | {u['source']} | {u['date']} |")
+lines += ["## User imports", "",
+          "Slots that take imports: " + ", ".join(f"{k} {v['slots'][0]}-{v['slots'][1]} ({v['format']})" for k, v in cat.get("importable", {}).items())
+          + ". What the pedal holds now (recorded by hand in `user_imports` of the catalog JSON; the pedal's slot names "
+          "can not be read back over USB yet, see docs/protocol.md):", ""] + IMPORT_TABLE + [""]
 for blk in cat["blocks"]:
     name = blk["name"]
     lines += [f"## {name} (block id {blk['id']}, {len(blk['models'])} models)", "", BLOCK_NOTES.get(name, ""), ""]
@@ -74,7 +83,8 @@ for blk in cat["blocks"]:
         knobs = m.get("knobs") or []
         dflt = m.get("defaults") or []
         ks = ", ".join(f"{i}: {k}" + (f" = {dflt[i]}" if i < len(dflt) else "") for i, k in enumerate(knobs))
-        lines.append(f"| {m['index']} | {m['name']} | {ks} |")
+        u = next((u for u in imports if u["block"] == name and u["slot"] == m["index"] + 1), None)
+        lines.append(f"| {m['index']} | {m['name']}" + (f" -> now **{u['name']}** ({u['kind']} import)" if u else "") + f" | {ks} |")
     lines.append("")
 (ROOT / "docs" / "catalog.md").write_text("\n".join(lines))
 
@@ -91,12 +101,14 @@ ref = ["# mvave reference (MK-300 profile)", "", "## Commands", "", "```", help_
        "| 0x00 | current preset index (0-based) | |", "| 0x38 | A/B Convert | 0 OFF, 1 ON |",
        "| 0x3C | RCH (right channel output) | 0 Nor, 1 Dry, 2 NoCAB |", "| 0x3D | USB Audio | 0 ON, 1 OFF, 2 RESAMPLE, 3 DRY |", "",
        "Only these were seen written by the editor; write nothing else in space 2.", "",
-       "## Model catalog", ""]
+       "## User imports (NAM A2 in AMP, IR in CAB)", "", *IMPORT_TABLE, "",
+       "## Model catalog (factory; see User imports for overwritten slots)", ""]
 for blk in cat["blocks"]:
     ref.append(f"### {blk['name']}")
     ref.append("")
     for m in blk["models"]:
-        ref.append(f"- {m['index']} {m['name']}: " + ", ".join(m.get("knobs") or []))
+        u = next((u for u in imports if u["block"] == blk["name"] and u["slot"] == m["index"] + 1), None)
+        ref.append(f"- {m['index']} {m['name']}" + (f" -> now {u['name']} ({u['kind']} import)" if u else "") + ": " + ", ".join(m.get("knobs") or []))
     ref.append("")
 (ROOT / "skills" / "mvave" / "reference.md").write_text("\n".join(ref))
 print("wrote docs/catalog.md", len(lines), "lines; skills/mvave/reference.md", len(ref), "lines")

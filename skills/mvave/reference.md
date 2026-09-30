@@ -4,13 +4,13 @@
 
 ```
 usage: mvave [-h] [--device DEVICE] [--port PORT]
-             {show,load,param,model,enable,volume,bpm,pan,presets,read,save,copy,rename,chain,reamp,global,global-set,models,params,bank,resolve,listen,doctor}
+             {show,load,param,model,enable,volume,bpm,pan,presets,read,save,copy,rename,chain,reamp,global,global-set,models,params,bank,resolve,listen,upload,doctor}
              ...
 
 M-VAVE pedals over USB without the M-EFCS editor
 
 positional arguments:
-  {show,load,param,model,enable,volume,bpm,pan,presets,read,save,copy,rename,chain,reamp,global,global-set,models,params,bank,resolve,listen,doctor}
+  {show,load,param,model,enable,volume,bpm,pan,presets,read,save,copy,rename,chain,reamp,global,global-set,models,params,bank,resolve,listen,upload,doctor}
     show                the edit buffer: name, chain, models, knobs
     load                load preset N (1..160) and show it
     param               set a knob of a block: param AMP Gain 60 (knob by name
@@ -43,6 +43,9 @@ positional arguments:
                         'Marshall JCM800'
     listen              print the preset index whenever it changes
                         (footswitches)
+    upload              import a NAM A2 model (AMP slot 1-120) or an IR (CAB
+                        slot 1-100): upload nam F.nam --slot 119 --name
+                        BJA_high_4
     doctor              check the globals for anything that would leave the
                         pedal silent for normal playing (exit 1 if dirty)
 
@@ -79,7 +82,15 @@ Blocks: 0 WAH, 1 FX, 2 GATE, 3 DS, 4 AMP, 5 CAB, 6 EQ, 7 MOD, 8 DLY, 9 REV, 10 V
 
 Only these were seen written by the editor; write nothing else in space 2.
 
-## Model catalog
+## User imports (NAM A2 in AMP, IR in CAB)
+
+| block | slot | name now | kind | factory model it replaced | source | date |
+|---|---|---|---|---|---|---|
+| AMP | 119 | BJA_high_4 | NAM | 119WatMod_BS | OpenRig-plugins nam/marshall_1959bja_a2/captures/high_4_a2.nam | 2026-09-29 |
+| AMP | 120 | marshall_supe | NAM | 120GKL800_BS | not recorded (name truncated to 13 characters) | 2026-09-29 |
+| CAB | 100 | V30_ev_mix_b | IR | 100Tace412 | V30_ev_mix_b.wav | 2026-09-29 |
+
+## Model catalog (factory; see User imports for overwritten slots)
 
 ### WAH
 
@@ -283,8 +294,8 @@ Only these were seen written by the editor; write nothing else in space 2.
 - 115 116Mark500_BS: Gain, Level, Bass, Middle, Treble, Reso, Pres, Bright
 - 116 117PjbCub_BS: Gain, Level, Bass, Middle, Treble, Reso, Pres, Bright
 - 117 118Tc21Vt_BS: Gain, Level, Bass, Middle, Treble, Reso, Pres, Bright
-- 118 119WatMod_BS: Gain, Level, Bass, Middle, Treble, Reso, Pres, Bright
-- 119 120GKL800_BS: Gain, Level, Bass, Middle, Treble, Reso, Pres, Bright
+- 118 119WatMod_BS -> now BJA_high_4 (NAM import): Gain, Level, Bass, Middle, Treble, Reso, Pres, Bright
+- 119 120GKL800_BS -> now marshall_supe (NAM import): Gain, Level, Bass, Middle, Treble, Reso, Pres, Bright
 
 ### CAB
 
@@ -387,7 +398,7 @@ Only these were seen written by the editor; write nothing else in space 2.
 - 96 97Pey115: Level, Low Cut, High Cut
 - 97 98RanRB100: Level, Low Cut, High Cut
 - 98 99SR115: Level, Low Cut, High Cut
-- 99 100Tace412: Level, Low Cut, High Cut
+- 99 100Tace412 -> now V30_ev_mix_b (IR import): Level, Low Cut, High Cut
 
 ### EQ
 
