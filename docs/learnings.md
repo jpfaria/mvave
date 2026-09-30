@@ -94,3 +94,9 @@ source: claude-code-sessions
 - **Upload SysEx:** the CAB upload was captured with MIDI Monitor (spy on output to
   `USB Composite Device`) at `~/.mvave/captures/mk300-cab-upload-2026-09-29.mmon.mmon`; not decoded
   yet. The NAM upload was not captured.
+
+### 2026-09-29 — NAM upload captured (M-EFCS → MK-300 V73)
+- Capture: `~/.mvave/captures/mk300-nam-upload-2026-09-29.mmon` (MIDI Monitor, spy on output to USB Composite Device). `high_4_a2.nam`, A2 Lite, AMP slot [119] BJA_high_4.
+- Bulk frames start `F0 00 32 09 79 3F 00 40 02 <offset lo/hi 7-bit> 00 00 70 7E 00 00 <payload>`; offset steps by `0x0777` (7-bit LE) per frame.
+- NAM: 2 blocks of 7×1178 + 1×853 bytes (Audition then Save). CAB (`mk300-cab-upload-2026-09-29.mmon.mmon`): 6×1178.
+- First payload byte differs by type: NAM `4E 02 35 02`, CAB `43 02 09 02`. Not decoded yet (7-bit packing, header fields TBD).
