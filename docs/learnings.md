@@ -100,3 +100,20 @@ source: claude-code-sessions
 - Bulk frames start `F0 00 32 09 79 3F 00 40 02 <offset lo/hi 7-bit> 00 00 70 7E 00 00 <payload>`; offset steps by `0x0777` (7-bit LE) per frame.
 - NAM: 2 blocks of 7×1178 + 1×853 bytes (Audition then Save). CAB (`mk300-cab-upload-2026-09-29.mmon.mmon`): 6×1178.
 - First payload byte differs by type: NAM `4E 02 35 02`, CAB `43 02 09 02`. Not decoded yet (7-bit packing, header fields TBD).
+
+### 2026-09-29 — Upload frames decoded (issue #1)
+- Captures hold both directions (MIDI Monitor archives `$objects` → `SMSystemExclusiveMessage` with
+  `originatingEndpoint` "To/From USB Composite Device"). Every upload frame is acked with the usual `ACK`.
+- Frames use the normal codec (`protocol.parse`) with CMD = `0x41 + (len << 3)` plus a flag `0x40` in
+  the 4th CMD digit (bit 27). With that flag the checksum is the normal one **minus 1**.
+- Sequence, all in space 0 with the flag: blob in chunks of 1015 bytes (field = byte offset) →
+  `write_u8` space `0xA` field 0 = type (`01` NAM, `02` CAB) = audition → Save: NAM re-sends the
+  whole blob with the new name; CAB re-sends only the 20-byte header → `write_u8` space `0xF`,
+  value 0, field = slot-1 for AMP (119 → `0x76`), `0x100` + slot-1 for CAB (100 → `0x163`).
+- Blob header: magic `NAM\0`/`CAB\0` + 14-byte name. CAB: + `01 32` + 2048 samples int24 LE at
+  **44.1 kHz** (the 48 kHz file resampled; corr 0.99999 vs `afconvert` to 44100, not byte-exact).
+- NAM blob (7836 B): header + u32 `0x28509664` (unknown) + `00 00` + 9 floats
+  `150,-20,20,425,-15,15,1800,-10,10` + the A2-Lite submodel's 1871 weights with every matrix
+  transposed to column-major (`[k][in][out]`) + **73 extra floats**: `825.08, 0, 0, 0` and 23×3 values
+  (one triple per layer, growing to ~50 — looks like a per-layer state computed by the editor).
+  The editor code is Dart AOT: `package:m_efcs/utils/nam_a2_lite_exporter.dart` (`exportNamA2LiteFile`).
