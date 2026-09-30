@@ -81,3 +81,16 @@ source: claude-code-sessions
   loading, and listening").
 - **Sources:** m-vave.com/appdownload; tone3000.com/guides/nam-a2-the-complete-guide;
   tone3000.com/blog/introducing-neural-amp-modeler-nam-architecture-2-a2.
+
+## 2026-09-29 — M-EFCS for Mac now imports NAM A2 and IR; IR must be integer PCM
+- **Mac editor updated:** `Import` → `AMP` → `Load AMX/NAM File to List` accepts a `*_a2.nam`
+  (`Audition` asks A2 Lite / A2 Full; Full is "temporarily unavailable"). `Save to Device` asks a
+  name and **which factory slot to overwrite** (AMP 1–120, CAB 1–100). There is no free slot.
+- **IR format:** a Float32 WAV loads into the list but `Audition` fails with *"The device is busy or
+  the preview operation failed"*. The same IR as 24-bit integer PCM 48 kHz works
+  (`afconvert -f WAVE -d LEI24@48000 in.wav out.wav`). The editor's own IRs are 24-bit/48 kHz.
+- **Slots used (jpfaria, Welcome to Paradise):** AMP `[119] BJA_high_4` (was `119WatMod_BS`),
+  CAB `[100] V30_ev_mix_b` (was `100Tace412`). AMP `[120] marshall_supe` is the Super Lead NAM.
+- **Upload SysEx:** the CAB upload was captured with MIDI Monitor (spy on output to
+  `USB Composite Device`) at `~/.mvave/captures/mk300-cab-upload-2026-09-29.mmon.mmon`; not decoded
+  yet. The NAM upload was not captured.
