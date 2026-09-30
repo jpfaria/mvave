@@ -15,3 +15,12 @@ parts of `skills/mvave/SKILL.md` it needs, so the knowledge stays in one place.
 | `mk300-system` | globals, doctor, re-amp, listen, timeouts |
 
 Install: `for a in agents/mk300-*.md; do ln -sf "$PWD/$a" ~/.claude/agents/; done`
+
+## Next idea (2026-09-30): a tree of agents
+A user-scope `tone-builder` agent as the entry point, which knows the device agents
+(`mk300-*`, OpenRig, Ampero…), and those know the agents that own each plugin/skill.
+- Tested: a subagent (`mk300-catalog`) has the Agent tool and launched `mk300-preset`, so nesting works.
+- Cost: every level starts a fresh context (~40k tokens measured for an empty "answer OK"),
+  so keep the tree shallow (2 levels) and send one complete task per hop.
+- The subagent does not see the list of agent types: each agent's prompt must name the agents
+  it can call.
