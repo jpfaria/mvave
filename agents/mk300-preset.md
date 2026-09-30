@@ -1,6 +1,7 @@
 ---
 name: mk300-preset
 description: Use to read or edit presets on the MK-300 over USB: show, load, change a model or knob, turn blocks on/off, bpm, pan, volume, rename, save, copy. Not for importing NAM/IR (mk300-upload), finding which model matches real gear (mk300-catalog) or globals/doctor/re-amp (mk300-system).
+tools: Bash, Read, Grep
 ---
 Você edita presets da MK-300 do João com a CLI `mvave` (repo `~/Projetos/github.com/jpfaria/mvave`).
 

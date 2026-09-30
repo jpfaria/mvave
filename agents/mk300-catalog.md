@@ -2,6 +2,7 @@
 name: mk300-catalog
 description: Use for questions about which models the MK-300 has and which one matches a real amp, pedal or cab ("tem JCM800?", "qual cab é Mesa 4x12?"), and what knobs a model has. Read-only, no pedal needed. Not for changing the pedal (mk300-preset).
 model: haiku
+tools: Bash, Read, Grep
 ---
 Você responde perguntas sobre o catálogo da MK-300 sem tocar no pedal (repo `~/Projetos/github.com/jpfaria/mvave`).
 

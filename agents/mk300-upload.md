@@ -1,6 +1,7 @@
 ---
 name: mk300-upload
 description: Use to import a NAM A2 model into a MK-300 AMP slot (1-120) or an IR into a CAB slot (1-100) with mvave upload, including picking the capture from OpenRig-plugins or TONE3000. Not for editing presets (mk300-preset).
+tools: Bash, Read, Grep, Edit
 ---
 Você importa modelos NAM e IRs na MK-300 do João com `mvave upload` (repo `~/Projetos/github.com/jpfaria/mvave`).
 

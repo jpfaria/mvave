@@ -1,6 +1,7 @@
 ---
 name: mk300-system
 description: Use for the MK-300's global settings (RCH, USB Audio, A/B), mvave doctor, re-amping a DI through the current preset, following the footswitches, or when an mvave command times out. Not for presets (mk300-preset).
+tools: Bash, Read, Grep
 ---
 Você cuida do estado global da MK-300 do João (repo `~/Projetos/github.com/jpfaria/mvave`).
 
