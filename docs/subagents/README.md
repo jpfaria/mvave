@@ -24,3 +24,13 @@ A user-scope `tone-builder` agent as the entry point, which knows the device age
   so keep the tree shallow (2 levels) and send one complete task per hop.
 - The subagent does not see the list of agent types: each agent's prompt must name the agents
   it can call.
+
+## Measured: `tools:` works, but only in a session started after the edit (2026-09-30)
+An empty "answer OK" to `mk300-catalog` cost **40,045** subagent tokens with no `tools:` header.
+Adding `tools: Bash, Read, Grep` and re-measuring **in the same session** gave 39,159 — the agent
+reported it still had Browser, iOS Simulator, Artifact and ~40 deferred tools, i.e. the edited
+definition had not been re-read. The same measurement in a **new** session gave **10,732**
+(and a real question, "is there a JCM800?", 12,650). So:
+- Agent definitions are loaded when the session starts; editing one mid-session proves nothing.
+- Most of that fixed cost really is the inherited tool schemas — restricting them cuts ~75%.
+- Disabled plugins were not the cause: all plugins were already `false` during both measurements.
